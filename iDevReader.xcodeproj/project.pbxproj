@@ -12,6 +12,8 @@
 		0A5898A5206873CF00245EED /* CategoryListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898A3206873CF00245EED /* CategoryListVC.xib */; };
 		0A5898AA2068777A00245EED /* FeedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898A82068777A00245EED /* FeedListVC.swift */; };
 		0A5898AB2068777A00245EED /* FeedListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898A92068777A00245EED /* FeedListVC.xib */; };
+		0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898AD20688EFA00245EED /* ArticleListVC.swift */; };
+		0A5898B020688EFA00245EED /* ArticleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898AE20688EFA00245EED /* ArticleListVC.xib */; };
 		0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB02068617500BE3690 /* AppDelegate.swift */; };
 		0A8F4EB82068617500BE3690 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB72068617500BE3690 /* Assets.xcassets */; };
 		0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB92068617500BE3690 /* LaunchScreen.storyboard */; };
@@ -37,6 +39,8 @@
 		0A5898A3206873CF00245EED /* CategoryListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryListVC.xib; sourceTree = "<group>"; };
 		0A5898A82068777A00245EED /* FeedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListVC.swift; sourceTree = "<group>"; };
 		0A5898A92068777A00245EED /* FeedListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListVC.xib; sourceTree = "<group>"; };
+		0A5898AD20688EFA00245EED /* ArticleListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVC.swift; sourceTree = "<group>"; };
+		0A5898AE20688EFA00245EED /* ArticleListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleListVC.xib; sourceTree = "<group>"; };
 		0A8F4EAD2068617400BE3690 /* iDevReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDevReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8F4EB02068617500BE3690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A8F4EB72068617500BE3690 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,8 +79,9 @@
 		0A5898A12068739D00245EED /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0A5898A72068773F00245EED /* FeedListVC */,
 				0A5898A62068772F00245EED /* CategoryListVC */,
+				0A5898A72068773F00245EED /* FeedListVC */,
+				0A5898B120688F0500245EED /* ArticleListVC */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -97,6 +102,15 @@
 				0A5898A92068777A00245EED /* FeedListVC.xib */,
 			);
 			path = FeedListVC;
+			sourceTree = "<group>";
+		};
+		0A5898B120688F0500245EED /* ArticleListVC */ = {
+			isa = PBXGroup;
+			children = (
+				0A5898AD20688EFA00245EED /* ArticleListVC.swift */,
+				0A5898AE20688EFA00245EED /* ArticleListVC.xib */,
+			);
+			path = ArticleListVC;
 			sourceTree = "<group>";
 		};
 		0A8F4EA42068617400BE3690 = {
@@ -250,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5898B020688EFA00245EED /* ArticleListVC.xib in Resources */,
 				0A5898AB2068777A00245EED /* FeedListVC.xib in Resources */,
 				0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */,
 				0A8F4EB82068617500BE3690 /* Assets.xcassets in Resources */,
@@ -375,6 +390,7 @@
 			files = (
 				0A5898AA2068777A00245EED /* FeedListVC.swift in Sources */,
 				0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */,
+				0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */,
 				0A5898A4206873CF00245EED /* CategoryListVC.swift in Sources */,
 				0A58989E206867BE00245EED /* Category.swift in Sources */,
 			);

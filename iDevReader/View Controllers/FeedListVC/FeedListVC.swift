@@ -39,11 +39,9 @@ extension FeedListVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let feed = feeds[indexPath.row]
-        print("\nTitle: \(feed.title)")
-        print("Author: \(feed.author)")
-        print("Url: \(feed.url)")
-        print("Site: \(feed.site)")
-        print("Twitter: \(feed.twitter?.absoluteString ?? "none")\n")
+        let articleListVC = ArticleListVC(feed: feed)
+        navigationController?.pushViewController(articleListVC, animated: true)
+        
     }
 }
 
@@ -67,36 +65,3 @@ extension FeedListVC: UITableViewDataSource {
     }
 
 }
-
-
-//        let feedUrl = URL(string: "https://krausefx.com/feed.xml")!
-//        let parser = MWFeedParser(feedURL: feedUrl)!
-//        parser.feedParseType = ParseTypeFull
-//        parser.connectionType = ConnectionTypeAsynchronously
-//
-//        parser.delegate = self
-//        parser.parse()
-
-//extension ViewController: MWFeedParserDelegate {
-//
-//    func feedParserDidStart(_ parser: MWFeedParser!) {
-//        print("\(#function)")
-//    }
-//
-//    func feedParser(_ parser: MWFeedParser!, didParseFeedInfo info: MWFeedInfo!) {
-//        print("\(#function)")
-//    }
-//
-//    func feedParser(_ parser: MWFeedParser!, didParseFeedItem item: MWFeedItem!) {
-//        print("\(#function)")
-//    }
-//
-//    func feedParserDidFinish(_ parser: MWFeedParser!) {
-//        print("\(#function)")
-//    }
-//
-//    func feedParser(_ parser: MWFeedParser!, didFailWithError error: Error!) {
-//        print("\(#function)")
-//    }
-//
-//}
