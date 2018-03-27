@@ -8,6 +8,7 @@
 
 import UIKit
 import MWFeedParser
+import SafariServices
 
 class ArticleListVC: UIViewController {
     
@@ -41,11 +42,25 @@ class ArticleListVC: UIViewController {
         parser.parse()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        navigationController?.isNavigationBarHidden = false
+    }
+    
 }
 
 extension ArticleListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let article = articles[indexPath.row]
+        
+        let webVC = SFSafariViewController(url: URL(string: article.link)!)
+        webVC.dismissButtonStyle = .close
+        webVC.delegate = self
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.pushViewController(webVC, animated: true)
     }
 }
 
@@ -83,6 +98,8 @@ extension ArticleListVC: MWFeedParserDelegate {
     }
     
     func feedParserDidFinish(_ parser: MWFeedParser!) {
+        print("\n\(#function)")
+        
         tableView.reloadData()
     }
     
@@ -90,4 +107,10 @@ extension ArticleListVC: MWFeedParserDelegate {
         print("\n\(#function)")
     }
     
+}
+
+extension ArticleListVC: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        navigationController?.popViewController(animated: true)
+    }
 }

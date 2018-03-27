@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A060D91206A9BFA00B836A3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A060D90206A9BFA00B836A3 /* Category.swift */; };
 		0A5898A4206873CF00245EED /* CategoryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898A2206873CF00245EED /* CategoryListVC.swift */; };
 		0A5898A5206873CF00245EED /* CategoryListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898A3206873CF00245EED /* CategoryListVC.xib */; };
 		0A5898AA2068777A00245EED /* FeedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898A82068777A00245EED /* FeedListVC.swift */; };
 		0A5898AB2068777A00245EED /* FeedListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898A92068777A00245EED /* FeedListVC.xib */; };
 		0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898AD20688EFA00245EED /* ArticleListVC.swift */; };
 		0A5898B020688EFA00245EED /* ArticleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898AE20688EFA00245EED /* ArticleListVC.xib */; };
-		0A5898B5206894FC00245EED /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898B4206894FC00245EED /* Category.swift */; };
 		0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB02068617500BE3690 /* AppDelegate.swift */; };
 		0A8F4EB82068617500BE3690 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB72068617500BE3690 /* Assets.xcassets */; };
 		0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB92068617500BE3690 /* LaunchScreen.storyboard */; };
@@ -34,13 +34,13 @@
 
 /* Begin PBXFileReference section */
 		0107A6662B0445595702B183 /* Pods-iDevReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDevReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iDevReader/Pods-iDevReader.debug.xcconfig"; sourceTree = "<group>"; };
+		0A060D90206A9BFA00B836A3 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		0A5898A2206873CF00245EED /* CategoryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListVC.swift; sourceTree = "<group>"; };
 		0A5898A3206873CF00245EED /* CategoryListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryListVC.xib; sourceTree = "<group>"; };
 		0A5898A82068777A00245EED /* FeedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListVC.swift; sourceTree = "<group>"; };
 		0A5898A92068777A00245EED /* FeedListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListVC.xib; sourceTree = "<group>"; };
 		0A5898AD20688EFA00245EED /* ArticleListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVC.swift; sourceTree = "<group>"; };
 		0A5898AE20688EFA00245EED /* ArticleListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleListVC.xib; sourceTree = "<group>"; };
-		0A5898B4206894FC00245EED /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = iDevReader/Models/Category.swift; sourceTree = SOURCE_ROOT; };
 		0A8F4EAD2068617400BE3690 /* iDevReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDevReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8F4EB02068617500BE3690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A8F4EB72068617500BE3690 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,10 +126,10 @@
 		0A5898B32068949800245EED /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0A5898B4206894FC00245EED /* Category.swift */,
+				0A060D90206A9BFA00B836A3 /* Category.swift */,
 			);
 			name = Models;
-			path = "New Group";
+			path = Model;
 			sourceTree = "<group>";
 		};
 		0A8F4EA42068617400BE3690 = {
@@ -406,10 +406,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A5898AA2068777A00245EED /* FeedListVC.swift in Sources */,
-				0A5898B5206894FC00245EED /* Category.swift in Sources */,
 				0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */,
 				0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */,
 				0A5898A4206873CF00245EED /* CategoryListVC.swift in Sources */,
+				0A060D91206A9BFA00B836A3 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

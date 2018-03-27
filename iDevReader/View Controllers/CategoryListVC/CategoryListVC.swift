@@ -42,7 +42,7 @@ class CategoryListVC: UIViewController {
                 }) else { return }
             
             DispatchQueue.main.async { [weak self] in
-                self?.categories = (try? JSONDecoder().decode([Category].self, from: JSONSerialization.data(withJSONObject: english["categories"], options: []))) ?? []
+                self?.categories = (try? JSONDecoder().decode([Category].self, from: JSONSerialization.data(withJSONObject: english["categories"] as Any, options: []))) ?? []
             }
             }.resume()
     }
