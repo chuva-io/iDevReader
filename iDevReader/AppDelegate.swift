@@ -16,7 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow()
-        window?.rootViewController = UINavigationController(rootViewController: CategoryListVC())
+        
+        let browseNavVC = UINavigationController(rootViewController: CategoryListVC())
+        browseNavVC.title = "Browse"
+        
+        let bookmarkVC = UITableViewController()
+        bookmarkVC.title = "Bookmarks"
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [browseNavVC, bookmarkVC]
+        
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
         return true

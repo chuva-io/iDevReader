@@ -42,12 +42,6 @@ class ArticleListVC: UIViewController {
         parser.parse()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        navigationController?.isNavigationBarHidden = false
-    }
-    
 }
 
 extension ArticleListVC: UITableViewDelegate {
@@ -55,12 +49,8 @@ extension ArticleListVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let article = articles[indexPath.row]
-        
-        let webVC = SFSafariViewController(url: URL(string: article.link)!)
-        webVC.dismissButtonStyle = .close
-        webVC.delegate = self
-        navigationController?.isNavigationBarHidden = true
-        navigationController?.pushViewController(webVC, animated: true)
+        let articleVC = ArticleVC(article: article)
+        navigationController?.pushViewController(articleVC, animated: true)
     }
 }
 
@@ -107,10 +97,4 @@ extension ArticleListVC: MWFeedParserDelegate {
         print("\n\(#function)")
     }
     
-}
-
-extension ArticleListVC: SFSafariViewControllerDelegate {
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        navigationController?.popViewController(animated: true)
-    }
 }
