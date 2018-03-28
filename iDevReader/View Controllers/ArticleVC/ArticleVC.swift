@@ -10,11 +10,17 @@ import UIKit
 import WebKit
 import MWFeedParser.MWFeedItem
 
+protocol ArticleVCDelegate {
+    func didChangeBookmarkState(of article: MWFeedItem)
+}
+
 class ArticleVC: UIViewController {
+    
+    var delegate: ArticleVCDelegate?
 
     let article: MWFeedItem
     
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet fileprivate weak var webView: WKWebView!
     
     init(article: MWFeedItem) {
         self.article = article
@@ -26,29 +32,21 @@ class ArticleVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Bookmark",
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: bookmarkButtonTitle,
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(bookmarkButtonTapped))
         
         webView.load(URLRequest(url: URL(string: article.link)!))
     }
-
-    @objc func bookmarkButtonTapped() {
-        let path = documentsDirectory.appendingPathComponent("bookmarks.data")
-        
-        var bookmarkedArticles = (NSKeyedUnarchiver.unarchiveObject(withFile: path.path) as? [MWFeedItem]) ?? []
-        
-        if let duplicateIndex = bookmarkedArticles.index(where: { $0.identifier == article.identifier }) {
-            bookmarkedArticles.remove(at: duplicateIndex)
-        }
-        
-        bookmarkedArticles.append(article)
-        NSKeyedArchiver.archiveRootObject(bookmarkedArticles, toFile: path.path)
-    }
     
-    var documentsDirectory: URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+    fileprivate var bookmarkButtonTitle: String {
+        return article.isBookmarked ? "Remove" : "Bookmark"
+    }
+
+    @objc fileprivate func bookmarkButtonTapped() {
+        delegate?.didChangeBookmarkState(of: article)
+        navigationItem.rightBarButtonItem?.title = bookmarkButtonTitle
     }
     
 }

@@ -65,8 +65,7 @@ class ArticleListVC: UIViewController {
         super.viewWillAppear(animated)
         
         if configuration == .bookmarks {
-            let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent("bookmarks.data")
-            articles = (NSKeyedUnarchiver.unarchiveObject(withFile: path.path) as? [MWFeedItem]) ?? []
+            articles = BookmarkStore().items
         }
     }
     
@@ -78,6 +77,7 @@ extension ArticleListVC: UITableViewDelegate {
         
         let article = articles[indexPath.row]
         let articleVC = ArticleVC(article: article)
+        articleVC.delegate = self
         navigationController?.pushViewController(articleVC, animated: true)
     }
 }
@@ -125,4 +125,11 @@ extension ArticleListVC: MWFeedParserDelegate {
         print("\n\(#function)")
     }
     
+}
+
+extension ArticleListVC: ArticleVCDelegate {
+    func didChangeBookmarkState(of article: MWFeedItem) {
+        let store = BookmarkStore()
+        article.isBookmarked ? store.remove(item: article) : store.insert(item: article)
+    }
 }
