@@ -12,18 +12,37 @@ import SafariServices
 
 class ArticleListVC: UIViewController {
     
+    enum Configuration {
+        case normal, bookmarks
+    }
+    
     fileprivate static let cellIdentifier = "cell_identifier"
     
-    fileprivate let parser: MWFeedParser
+    fileprivate let parser: MWFeedParser?
     
-    let feed: Feed
-    var articles: [MWFeedItem] = []
+    let feed: Feed?
+    let configuration: Configuration
+    var articles: [MWFeedItem] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
     init(feed: Feed) {
         self.feed = feed
+        self.configuration = .normal
         self.parser = MWFeedParser(feedURL: feed.url)!
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(articles: [MWFeedItem] = [], configuration: Configuration = .normal) {
+        self.articles = articles
+        self.configuration = configuration
+        self.parser = nil
+        self.feed = nil
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,9 +56,18 @@ class ArticleListVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        parser.delegate = self
-        parser.connectionType = ConnectionTypeAsynchronously
-        parser.parse()
+        parser?.delegate = self
+        parser?.connectionType = ConnectionTypeAsynchronously
+        parser?.parse()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if configuration == .bookmarks {
+            let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!.appendingPathComponent("bookmarks.data")
+            articles = (NSKeyedUnarchiver.unarchiveObject(withFile: path.path) as? [MWFeedItem]) ?? []
+        }
     }
     
 }

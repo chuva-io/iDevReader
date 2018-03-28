@@ -35,7 +35,20 @@ class ArticleVC: UIViewController {
     }
 
     @objc func bookmarkButtonTapped() {
+        let path = documentsDirectory.appendingPathComponent("bookmarks.data")
         
+        var bookmarkedArticles = (NSKeyedUnarchiver.unarchiveObject(withFile: path.path) as? [MWFeedItem]) ?? []
+        
+        if let duplicateIndex = bookmarkedArticles.index(where: { $0.identifier == article.identifier }) {
+            bookmarkedArticles.remove(at: duplicateIndex)
+        }
+        
+        bookmarkedArticles.append(article)
+        NSKeyedArchiver.archiveRootObject(bookmarkedArticles, toFile: path.path)
+    }
+    
+    var documentsDirectory: URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
     }
     
 }

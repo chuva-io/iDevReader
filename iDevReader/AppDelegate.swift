@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let browseNavVC = UINavigationController(rootViewController: CategoryListVC())
         browseNavVC.title = "Browse"
         
-        let bookmarkVC = UITableViewController()
-        bookmarkVC.title = "Bookmarks"
+        let bookmarkNavVC = UINavigationController(rootViewController: ArticleListVC(configuration: .bookmarks))
+        bookmarkNavVC.title = "Bookmarks"
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [browseNavVC, bookmarkVC]
+        tabBarController.viewControllers = [browseNavVC, bookmarkNavVC]
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
