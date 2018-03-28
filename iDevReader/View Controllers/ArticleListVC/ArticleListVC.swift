@@ -78,8 +78,23 @@ extension ArticleListVC: UITableViewDelegate {
         let article = articles[indexPath.row]
         let articleVC = ArticleVC(article: article)
         articleVC.delegate = self
-        navigationController?.pushViewController(articleVC, animated: true)
+        
+        if let navVC = navigationController {
+            navVC.pushViewController(articleVC, animated: true)
+        }
+        else {
+            let navVC = UINavigationController(rootViewController: articleVC)
+            articleVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                         target: self,
+                                                                         action: #selector(dismissArticleVC))
+            present(navVC, animated: true)
+        }
     }
+
+    @objc fileprivate func dismissArticleVC() {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension ArticleListVC: UITableViewDataSource {
