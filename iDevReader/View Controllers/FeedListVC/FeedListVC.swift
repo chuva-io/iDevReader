@@ -12,7 +12,14 @@ class FeedListVC: UIViewController {
 
     fileprivate static let cellIdentifier = "cell_identifier"
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            let nib = UINib(nibName: "FeedTableViewCell", bundle: nil)
+            tableView.register(nib, forCellReuseIdentifier: FeedListVC.cellIdentifier)
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
 
     let feeds: [Feed]
 
@@ -23,14 +30,6 @@ class FeedListVC: UIViewController {
     }
 
     required init?(coder aDecoder: NSCoder) { fatalError() }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: FeedListVC.cellIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
 
 }
 
@@ -52,10 +51,12 @@ extension FeedListVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FeedListVC.cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FeedListVC.cellIdentifier, for: indexPath) as! FeedTableViewCell
         let feed = feeds[indexPath.row]
 
-        cell.textLabel?.text = feed.title
+        cell.titleLabel.text = feed.title
+        cell.authorLabel.text = feed.author
+        cell.twitterButton.isHidden = feed.twitter == nil
 
         return cell
     }

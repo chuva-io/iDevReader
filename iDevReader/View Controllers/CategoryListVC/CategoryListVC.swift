@@ -24,14 +24,17 @@ class CategoryListVC: UIViewController {
         }
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            let nib = UINib(nibName: "CategoryTableViewCell", bundle: nil)
+            tableView.register(nib, forCellReuseIdentifier: CategoryListVC.cellIdentifier)
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CategoryListVC.cellIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
         
         URLSession.shared.dataTask(with: URL(string: "https://raw.githubusercontent.com/daveverwer/iOSDevDirectory/master/content.json")!) { data, response, error in
             guard let data = data,
@@ -49,7 +52,8 @@ class CategoryListVC: UIViewController {
 
 }
 
-extension CategoryListVC: UITableViewDelegate {
+extension CategoryListVC: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -57,23 +61,21 @@ extension CategoryListVC: UITableViewDelegate {
         let feedsVC = FeedListVC(feeds: feeds)
         navigationController?.pushViewController(feedsVC, animated: true)
     }
-}
-
-extension CategoryListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryListVC.cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryListVC.cellIdentifier, for: indexPath) as! CategoryTableViewCell
         let category = categories[indexPath.row]
-        
-        cell.textLabel?.text = category.title
+
+        cell.titleLabel.text = category.title
+        cell.descriptionLabel.text = category.description
         
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Categories"
     }
