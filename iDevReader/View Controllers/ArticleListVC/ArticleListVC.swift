@@ -27,8 +27,16 @@ class ArticleListVC: UIViewController {
             tableView.reloadData()
         }
     }
+    var expandedIndexPaths: Set<IndexPath> = []
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            let nib = UINib(nibName: "ArticleTableViewCell", bundle: nil)
+            tableView.register(nib, forCellReuseIdentifier: ArticleListVC.cellIdentifier)
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     
     init(feed: Feed) {
         self.feed = feed
@@ -52,10 +60,6 @@ class ArticleListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ArticleListVC.cellIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         parser?.delegate = self
         parser?.connectionType = ConnectionTypeAsynchronously
         parser?.parse()
@@ -67,6 +71,32 @@ class ArticleListVC: UIViewController {
         if configuration == .bookmarks {
             articles = BookmarkStore().items
         }
+    }
+    
+    
+    //MARK: - Selectors
+
+    @objc func showMoreButtonTapped(_ sender: UIButton, forEvent event: UIEvent) {
+        guard let tap = event.touches(for: sender)?.first,
+            let indexpath = tableView.indexPathForRow(at: tap.location(in: tableView)),
+            let cell = tableView.cellForRow(at: indexpath) as? ArticleTableViewCell else {
+                return
+        }
+        
+        if expandedIndexPaths.contains(indexpath) { // collapse
+            cell.descriptionLabel.numberOfLines = 4
+            cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
+            expandedIndexPaths.remove(indexpath)
+        }
+        else {  // expand
+            cell.descriptionLabel.numberOfLines = 0
+            cell.showMoreButton.setTitle(ArticleTableViewCell.showLessText, for: .normal)
+            expandedIndexPaths.insert(indexpath)
+        }
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        tableView.scrollToRow(at: indexpath, at: .top, animated: true)
     }
     
 }
@@ -104,10 +134,28 @@ extension ArticleListVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleListVC.cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleListVC.cellIdentifier, for: indexPath) as! ArticleTableViewCell
         let article = articles[indexPath.row]
         
-        cell.textLabel?.text = article.title
+        cell.titleLabel.text = article.title
+        cell.authorLabel.text = article.author
+        cell.descriptionLabel.text = article.summary
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yy"
+        let dateString = formatter.string(from: article.date)
+        
+        cell.dateLabel.text = dateString
+        cell.showMoreButton.addTarget(self, action: #selector(showMoreButtonTapped(_:forEvent:)), for: .touchUpInside)
+        
+        if expandedIndexPaths.contains(indexPath) { // collapse
+            cell.descriptionLabel.numberOfLines = 0
+            cell.showMoreButton.setTitle(ArticleTableViewCell.showLessText, for: .normal)
+        }
+        else {  // expand
+            cell.descriptionLabel.numberOfLines = 4
+            cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
+        }
         
         return cell
     }
