@@ -144,7 +144,7 @@ extension ArticleListVC: UITableViewDataSource {
         
         cell.titleLabel.text = article.title
         cell.authorLabel.text = article.author
-        cell.descriptionLabel.text = article.summary
+        cell.descriptionLabel.text = article.summary.convertingHTMLToPlainText()
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yy"
