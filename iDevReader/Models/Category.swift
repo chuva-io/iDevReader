@@ -22,7 +22,7 @@ struct Category: Decodable {
     }
     
     let title: String
-    let type: CategoryType
+    let type: CategoryType?
     let description: String
     let feeds: [Feed]
     
@@ -37,7 +37,7 @@ struct Category: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
         title = try values.decode(String.self, forKey: .title)
-        type = CategoryType(rawValue: try values.decode(String.self, forKey: .type))!
+        type = CategoryType(rawValue: try values.decode(String.self, forKey: .type))
         description = try values.decode(String.self, forKey: .description)
         feeds = try values.decode([Feed].self, forKey: .feeds)
     }
