@@ -19,6 +19,7 @@ struct Category: Decodable {
         case podcasts
         case youtube
         case inactive
+        case newsletters
     }
     
     let title: String
