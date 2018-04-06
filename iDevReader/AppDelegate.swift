@@ -18,10 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         
         let browseNavVC = UINavigationController(rootViewController: CategoryListVC())
-        browseNavVC.title = "Browse"
-        
         let bookmarkVC = ArticleListVC(configuration: .bookmarks)
-        bookmarkVC.title = "Bookmarks"
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [browseNavVC, bookmarkVC]
@@ -29,7 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
+        // Apply Theme
+        window?.tintColor = Theme.Colors.tintColor
+        Theme.applyAppearance()
+        Theme.configureTabBar(tabBarController: tabBarController)
+        
         return true
     }
-
 }

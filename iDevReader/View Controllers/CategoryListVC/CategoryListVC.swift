@@ -30,11 +30,16 @@ class CategoryListVC: UIViewController {
             tableView.register(nib, forCellReuseIdentifier: CategoryListVC.cellIdentifier)
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.tableFooterView = UIView()
+            tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 8)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Categories"
         
         URLSession.shared.dataTask(with: URL(string: "https://raw.githubusercontent.com/daveverwer/iOSDevDirectory/master/content.json")!) { data, response, error in
             guard let data = data,
@@ -59,6 +64,7 @@ extension CategoryListVC: UITableViewDelegate, UITableViewDataSource {
         
         let feeds = categories[indexPath.row].feeds
         let feedsVC = FeedListVC(feeds: feeds)
+        feedsVC.title = categories[indexPath.row].title
         navigationController?.pushViewController(feedsVC, animated: true)
     }
     
@@ -75,9 +81,4 @@ extension CategoryListVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Categories"
-    }
-    
 }

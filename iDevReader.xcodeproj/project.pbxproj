@@ -27,6 +27,11 @@
 		0AEDFDA920731CC000208CA1 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA720731CC000208CA1 /* ArticleTableViewCell.swift */; };
 		0AEDFDAA20731CC000208CA1 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA820731CC000208CA1 /* ArticleTableViewCell.xib */; };
 		0AEEB847206C114200F11F2A /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEEB846206C114200F11F2A /* BookmarkStore.swift */; };
+		2C1AD89B20770E890087C3BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AD89A20770E890087C3BF /* Theme.swift */; };
+		2C1AD89D2077188F0087C3BF /* BaseRoundedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AD89C2077188F0087C3BF /* BaseRoundedCardCell.swift */; };
+		2C1AD89F207728460087C3BF /* LaunchScreenIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AD89E207728460087C3BF /* LaunchScreenIcon.png */; };
+		2C1AD8A320772E030087C3BF /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AD8A220772E030087C3BF /* EmptyState.swift */; };
+		2C1AD8A520772E410087C3BF /* EmptyState.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AD8A420772E410087C3BF /* EmptyState.xib */; };
 		66BAAE64B98270B432F9E230 /* Pods_iDevReaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F37E4A76029495D33BDF1A44 /* Pods_iDevReaderTests.framework */; };
 		C64DB00FC979F0022C1FDCF5 /* Pods_iDevReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E821B9F4B8A9B31C37AA85D /* Pods_iDevReader.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +74,11 @@
 		0AEEB846206C114200F11F2A /* BookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkStore.swift; sourceTree = "<group>"; };
 		1CC0362BE5A96EE45585F172 /* Pods-iDevReaderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDevReaderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iDevReaderTests/Pods-iDevReaderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		284CF14A6C9626C38ABB7BD3 /* Pods-iDevReaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDevReaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iDevReaderTests/Pods-iDevReaderTests.release.xcconfig"; sourceTree = "<group>"; };
+		2C1AD89A20770E890087C3BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		2C1AD89C2077188F0087C3BF /* BaseRoundedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRoundedCardCell.swift; sourceTree = "<group>"; };
+		2C1AD89E207728460087C3BF /* LaunchScreenIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenIcon.png; sourceTree = "<group>"; };
+		2C1AD8A220772E030087C3BF /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
+		2C1AD8A420772E410087C3BF /* EmptyState.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyState.xib; sourceTree = "<group>"; };
 		4E821B9F4B8A9B31C37AA85D /* Pods_iDevReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iDevReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A15BC5CEB4F9CBE080C4FF /* Pods-iDevReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDevReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-iDevReader/Pods-iDevReader.release.xcconfig"; sourceTree = "<group>"; };
 		F37E4A76029495D33BDF1A44 /* Pods_iDevReaderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iDevReaderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,9 +162,11 @@
 		0A5898B22068948100245EED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2C1AD89E207728460087C3BF /* LaunchScreenIcon.png */,
 				0A8F4EB72068617500BE3690 /* Assets.xcassets */,
 				0A8F4EB92068617500BE3690 /* LaunchScreen.storyboard */,
 				0A8F4EBC2068617500BE3690 /* Info.plist */,
+				2C1AD89A20770E890087C3BF /* Theme.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -205,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				0AEDFD9C2073069A00208CA1 /* Cells */,
+				2C1AD8A220772E030087C3BF /* EmptyState.swift */,
+				2C1AD8A420772E410087C3BF /* EmptyState.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +228,7 @@
 			children = (
 				0AEDFDA520731C5300208CA1 /* CategoryTableViewCell */,
 				0AEDFDA620731C6A00208CA1 /* FeedTableViewCell */,
+				2C1AD89C2077188F0087C3BF /* BaseRoundedCardCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -356,10 +371,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A5898B020688EFA00245EED /* ArticleListVC.xib in Resources */,
+				2C1AD8A520772E410087C3BF /* EmptyState.xib in Resources */,
 				0AEDFDAA20731CC000208CA1 /* ArticleTableViewCell.xib in Resources */,
 				0AEDFDA0207306BD00208CA1 /* CategoryTableViewCell.xib in Resources */,
 				0A5898AB2068777A00245EED /* FeedListVC.xib in Resources */,
 				0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */,
+				2C1AD89F207728460087C3BF /* LaunchScreenIcon.png in Resources */,
 				0A8F4EB82068617500BE3690 /* Assets.xcassets in Resources */,
 				0AEDFDA42073155800208CA1 /* FeedTableViewCell.xib in Resources */,
 				0A5898A5206873CF00245EED /* CategoryListVC.xib in Resources */,
@@ -485,8 +502,11 @@
 			files = (
 				0AEDFDA920731CC000208CA1 /* ArticleTableViewCell.swift in Sources */,
 				0A5898AA2068777A00245EED /* FeedListVC.swift in Sources */,
+				2C1AD89D2077188F0087C3BF /* BaseRoundedCardCell.swift in Sources */,
+				2C1AD8A320772E030087C3BF /* EmptyState.swift in Sources */,
 				0A569C57206AA4B4003B4D4D /* ArticleVC.swift in Sources */,
 				0A569C53206AA080003B4D4D /* Category.swift in Sources */,
+				2C1AD89B20770E890087C3BF /* Theme.swift in Sources */,
 				0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */,
 				0AEEB847206C114200F11F2A /* BookmarkStore.swift in Sources */,
 				0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */,

@@ -31,8 +31,9 @@ class ArticleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: bookmarkButtonTitle,
+        
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: bookmarkButtonImage,
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(bookmarkButtonTapped))
@@ -40,13 +41,13 @@ class ArticleVC: UIViewController {
         webView.load(URLRequest(url: URL(string: article.link)!))
     }
     
-    fileprivate var bookmarkButtonTitle: String {
-        return article.isBookmarked ? "Remove" : "Bookmark"
+    fileprivate var bookmarkButtonImage: UIImage? {
+        return article.isBookmarked ? UIImage(named: "bookmarkOn") : UIImage(named: "bookmarkOff")
     }
 
     @objc fileprivate func bookmarkButtonTapped() {
         delegate?.didChangeBookmarkState(of: article)
-        navigationItem.rightBarButtonItem?.title = bookmarkButtonTitle
+        navigationItem.rightBarButtonItem?.image = bookmarkButtonImage
     }
     
 }
