@@ -29,6 +29,10 @@ class ArticleListVC: UIViewController {
     }
     var expandedIndexPaths: Set<IndexPath> = []
     
+    fileprivate lazy var emptyView: EmptyState = {
+        return EmptyState(frame: tableView.bounds)
+    }()
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             let nib = UINib(nibName: "ArticleTableViewCell", bundle: nil)
@@ -130,6 +134,7 @@ extension ArticleListVC: UITableViewDelegate {
 extension ArticleListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.backgroundView = (articles.count == 0) ? emptyView : nil
         return articles.count
     }
     
@@ -161,7 +166,7 @@ extension ArticleListVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Articles"
+        return  (articles.count == 0) ? nil : "Articles"
     }
     
 }

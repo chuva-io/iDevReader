@@ -18,6 +18,7 @@ class FeedListVC: UIViewController {
             tableView.register(nib, forCellReuseIdentifier: FeedListVC.cellIdentifier)
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.tableFooterView = UIView()
         }
     }
 
@@ -25,7 +26,6 @@ class FeedListVC: UIViewController {
 
     init(feeds: [Feed]) {
         self.feeds = feeds
-
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -39,6 +39,7 @@ extension FeedListVC: UITableViewDelegate {
 
         let feed = feeds[indexPath.row]
         let articleListVC = ArticleListVC(feed: feed)
+        articleListVC.title = feed.author
         navigationController?.pushViewController(articleListVC, animated: true)
         
     }
