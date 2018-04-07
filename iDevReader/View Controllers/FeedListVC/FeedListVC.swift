@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol FeedListVCDelegate {
+    func sender(_ sender: FeedListVC, didSelect feed: Feed)
+}
+
 class FeedListVC: UIViewController {
 
     fileprivate static let cellIdentifier = "cell_identifier"
+    
+    var delegate: FeedListVCDelegate?
 
     @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
@@ -37,11 +43,7 @@ extension FeedListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let feed = feeds[indexPath.row]
-        let articleListVC = ArticleListVC(feed: feed)
-        articleListVC.title = feed.author
-        navigationController?.pushViewController(articleListVC, animated: true)
-        
+        delegate?.sender(self, didSelect: feeds[indexPath.row])
     }
 }
 

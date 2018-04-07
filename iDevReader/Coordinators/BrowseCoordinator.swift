@@ -32,8 +32,19 @@ extension BrowseCoordinator: CategoryListVCDelegate {
     func sender(_ sender: CategoryListVC, didSelect category: Category) {
         let feeds = category.feeds
         let feedsVC = FeedListVC(feeds: feeds)
+        feedsVC.delegate = self
         feedsVC.title = category.title
         navigationVC.pushViewController(feedsVC, animated: true)
+    }
+    
+}
+
+extension BrowseCoordinator: FeedListVCDelegate {
+    
+    func sender(_ sender: FeedListVC, didSelect feed: Feed) {
+        let articleListVC = ArticleListVC(feed: feed)
+        articleListVC.title = feed.author
+        navigationVC.pushViewController(articleListVC, animated: true)
     }
     
 }
