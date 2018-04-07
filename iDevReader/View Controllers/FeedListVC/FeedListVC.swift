@@ -12,7 +12,7 @@ class FeedListVC: UIViewController {
 
     fileprivate static let cellIdentifier = "cell_identifier"
 
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
             let nib = UINib(nibName: "FeedTableViewCell", bundle: nil)
             tableView.register(nib, forCellReuseIdentifier: FeedListVC.cellIdentifier)

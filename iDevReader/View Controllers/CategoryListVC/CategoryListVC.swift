@@ -18,13 +18,13 @@ class CategoryListVC: UIViewController {
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
     
-    var categories: [Category] = [] {
+    fileprivate var categories: [Category] = [] {
         didSet {
             tableView.reloadData()
         }
     }
     
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
             let nib = UINib(nibName: "CategoryTableViewCell", bundle: nil)
             tableView.register(nib, forCellReuseIdentifier: CategoryListVC.cellIdentifier)
@@ -32,7 +32,7 @@ class CategoryListVC: UIViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.tableFooterView = UIView()
-            tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 8)
+            tableView.contentInset = UIEdgeInsetsMake(8, 0, 8, 0)
         }
     }
     

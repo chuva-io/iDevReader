@@ -22,18 +22,14 @@ class ArticleListVC: UIViewController {
     
     let feed: Feed?
     let configuration: Configuration
-    var articles: [MWFeedItem] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    var expandedIndexPaths: Set<IndexPath> = []
+    var articles: [MWFeedItem] = []
+    fileprivate var expandedIndexPaths: Set<IndexPath> = []
     
     fileprivate lazy var emptyView: EmptyState = {
         return EmptyState(frame: tableView.bounds)
     }()
     
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
             let nib = UINib(nibName: "ArticleTableViewCell", bundle: nil)
             tableView.register(nib, forCellReuseIdentifier: ArticleListVC.cellIdentifier)
@@ -74,13 +70,14 @@ class ArticleListVC: UIViewController {
         
         if configuration == .bookmarks {
             articles = BookmarkStore().items
+            tableView.reloadData()
         }
     }
     
     
     //MARK: - Selectors
 
-    @objc func showMoreButtonTapped(_ sender: UIButton, forEvent event: UIEvent) {
+    @objc fileprivate func showMoreButtonTapped(_ sender: UIButton, forEvent event: UIEvent) {
         guard let tap = event.touches(for: sender)?.first,
             let indexpath = tableView.indexPathForRow(at: tap.location(in: tableView)),
             let cell = tableView.cellForRow(at: indexpath) as? ArticleTableViewCell else {
@@ -105,7 +102,8 @@ class ArticleListVC: UIViewController {
     
 }
 
-extension ArticleListVC: UITableViewDelegate {
+extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -113,7 +111,8 @@ extension ArticleListVC: UITableViewDelegate {
         let articleVC = ArticleVC(article: article)
         articleVC.delegate = self
         
-        if let navVC = navigationController {
+        if let navVC = navigationController,
+            UIDevice.current.userInterfaceIdiom == .phone {
             navVC.pushViewController(articleVC, animated: true)
         }
         else {
@@ -121,17 +120,15 @@ extension ArticleListVC: UITableViewDelegate {
             articleVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                          target: self,
                                                                          action: #selector(dismissArticleVC))
+            
+            navVC.modalPresentationStyle = .pageSheet
             present(navVC, animated: true)
         }
     }
-
+    
     @objc fileprivate func dismissArticleVC() {
         dismiss(animated: true, completion: nil)
     }
-    
-}
-
-extension ArticleListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableView.backgroundView = (articles.count == 0) ? emptyView : nil
@@ -163,6 +160,20 @@ extension ArticleListVC: UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return configuration == .bookmarks ? true : false
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let store = BookmarkStore()
+        let item = articles.remove(at: indexPath.row)
+        store.remove(item: item)
+        
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [indexPath], with: .left)
+        tableView.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
