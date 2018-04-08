@@ -57,10 +57,11 @@ class ArticleListVC: UIViewController {
     }
     
     func insert(_ article: MWFeedItem) {
-        articles.insert(article, at: 0)
+        let index = articles.count
+        articles.insert(article, at: index)
         
         tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         tableView.endUpdates()
     }
     

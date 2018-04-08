@@ -12,18 +12,19 @@ import MWFeedParser.MWFeedItem
 class BrowseCoordinator: NSObject {
     
     let presenter: UINavigationController
+    let bookmarkStore: BookmarkStore
     
-    fileprivate let bookmarkStore = BookmarkStore()
     fileprivate var feedParser: MWFeedParser?
     fileprivate var articleListVC: ArticleListVC?
     
-    init(presenter: UINavigationController) {
+    init(presenter: UINavigationController, bookmarkStore: BookmarkStore) {
         let vc = CategoryListVC()
         vc.title = "Categories"
         
         self.presenter = presenter
         self.presenter.navigationBar.prefersLargeTitles = true
         self.presenter.pushViewController(vc, animated: false)
+        self.bookmarkStore = bookmarkStore
         
         super.init()
         vc.delegate = self

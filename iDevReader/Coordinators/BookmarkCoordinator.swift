@@ -11,11 +11,16 @@ import MWFeedParser.MWFeedItem
 
 class BookmarkCoordinator {
     let rootVC: UIViewController
-    let bookmarkStore = BookmarkStore()
+    let bookmarkStore: BookmarkStore
     
-    var articleListVC: ArticleListVC?
+    fileprivate var articleListVC: ArticleListVC?
     
-    init() {
+    func updateBookmarks() {
+        articleListVC?.set(articles: bookmarkStore.items)
+    }
+    
+    init(bookmarkStore: BookmarkStore) {
+        self.bookmarkStore = bookmarkStore
         self.articleListVC = ArticleListVC(articles: bookmarkStore.items, allowsEditing: true)
         self.rootVC = articleListVC!
         self.articleListVC!.delegate = self
