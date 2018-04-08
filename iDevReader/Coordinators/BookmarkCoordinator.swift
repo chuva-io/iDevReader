@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct BookmarkCoordinator {
+class BookmarkCoordinator {
     let rootVC: UIViewController
     
     init() {

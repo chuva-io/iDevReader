@@ -7,12 +7,23 @@
 //
 
 import UIKit
-import MWFeedParser
+import MWFeedParser.MWFeedItem
 import SafariServices
+
+protocol ArticleListVCDelegate {
+    func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem)
+    func sender(_ sender: ArticleListVC, didDelete article: MWFeedItem)
+}
+
+extension ArticleListVCDelegate {   // Optional
+    func sender(_ sender: ArticleListVC, didDelete article: MWFeedItem) { }
+}
 
 class ArticleListVC: UIViewController {
     
     fileprivate static let cellIdentifier = "cell_identifier"
+    
+    var delegate: ArticleListVCDelegate?
     
     let allowsEditing: Bool
     var articles: [MWFeedItem] = []
@@ -54,15 +65,6 @@ class ArticleListVC: UIViewController {
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        if configuration == .bookmarks {
-//            articles = BookmarkStore().items
-//            tableView.reloadData()
-//        }
-    }
-    
     
     //MARK: - Selectors
 
@@ -97,26 +99,7 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let article = articles[indexPath.row]
-        let articleVC = ArticleVC(article: article)
-        articleVC.delegate = self
-        
-        if let navVC = navigationController,
-            UIDevice.current.userInterfaceIdiom == .phone {
-            navVC.pushViewController(articleVC, animated: true)
-        }
-        else {
-            let navVC = UINavigationController(rootViewController: articleVC)
-            articleVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                                         target: self,
-                                                                         action: #selector(dismissArticleVC))
-            
-            navVC.modalPresentationStyle = .pageSheet
-            present(navVC, animated: true)
-        }
-    }
-    
-    @objc fileprivate func dismissArticleVC() {
-        dismiss(animated: true, completion: nil)
+        delegate?.sender(self, didSelect: article)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -156,9 +139,8 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        let store = BookmarkStore()
         let item = articles.remove(at: indexPath.row)
-        store.remove(item: item)
+        delegate?.sender(self, didDelete: item)
         
         tableView.beginUpdates()
         tableView.deleteRows(at: [indexPath], with: .left)
@@ -193,11 +175,4 @@ extension ArticleListVC: MWFeedParserDelegate {
         print("\n\(#function)")
     }
     
-}
-
-extension ArticleListVC: ArticleVCDelegate {
-    func didChangeBookmarkState(of article: MWFeedItem) {
-        let store = BookmarkStore()
-        article.isBookmarked ? store.remove(item: article) : store.insert(item: article)
-    }
 }

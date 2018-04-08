@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct AppCoordinator {
+class AppCoordinator {
     
     let window: UIWindow
     fileprivate let tabBarController = UITabBarController()

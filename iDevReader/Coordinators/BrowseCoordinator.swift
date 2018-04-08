@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import MWFeedParser.MWFeedItem
 
-struct BrowseCoordinator {
+class BrowseCoordinator {
     
     let presenter: UINavigationController
+    
+    fileprivate let bookmarkStore = BookmarkStore()
     
     init(presenter: UINavigationController) {
         let vc = CategoryListVC()
@@ -41,10 +44,45 @@ extension BrowseCoordinator: CategoryListVCDelegate {
 extension BrowseCoordinator: FeedListVCDelegate {
     
     func sender(_ sender: FeedListVC, didSelect feed: Feed) {
-        let articleListVC = ArticleListVC(  )
+        let articleListVC = ArticleListVC()
+        articleListVC.delegate = self
         articleListVC.title = feed.author
         articleListVC.load(feed: feed)
         presenter.pushViewController(articleListVC, animated: true)
+    }
+    
+}
+
+extension BrowseCoordinator: ArticleListVCDelegate {
+    
+    func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem) {
+        let articleVC = ArticleVC(article: article)
+        articleVC.delegate = self
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let navVC = UINavigationController(rootViewController: articleVC)
+            articleVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                         target: self,
+                                                                         action: #selector(dismissArticleVC))
+            
+            navVC.modalPresentationStyle = .pageSheet
+            presenter.present(navVC, animated: true)
+        }
+        else {
+            presenter.pushViewController(articleVC, animated: true)
+        }
+    }
+    
+    @objc fileprivate func dismissArticleVC() {
+        presenter.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension BrowseCoordinator: ArticleVCDelegate {
+    
+    func didChangeBookmarkState(of article: MWFeedItem) {
+        article.isBookmarked ? bookmarkStore.remove(item: article) : bookmarkStore.insert(item: article)
     }
     
 }
