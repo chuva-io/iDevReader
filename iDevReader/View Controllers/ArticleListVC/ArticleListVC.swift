@@ -27,8 +27,6 @@ class ArticleListVC: UIViewController {
     
     let allowsEditing: Bool
     private(set) var articles: [MWFeedItem] = []
-    
-    fileprivate var parser: MWFeedParser?
     fileprivate var expandedIndexPaths: Set<IndexPath> = []
     
     fileprivate lazy var emptyView: EmptyState = {
@@ -44,18 +42,6 @@ class ArticleListVC: UIViewController {
         }
     }
     
-    func load(feed: Feed) {
-        if let parser = parser,
-            parser.isParsing == true {
-            parser.stopParsing()
-        }
-        
-        parser = MWFeedParser(feedURL: feed.url)!
-        parser?.delegate = self
-        parser?.connectionType = ConnectionTypeAsynchronously
-        parser?.parse()
-    }
-    
     init(articles: [MWFeedItem] = [], allowsEditing: Bool = false) {
         self.articles = articles
         self.allowsEditing = allowsEditing
@@ -64,6 +50,11 @@ class ArticleListVC: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
+    
+    func set(articles: [MWFeedItem]) {
+        self.articles = articles
+        tableView.reloadData()
+    }
     
     func insert(_ article: MWFeedItem) {
         articles.insert(article, at: 0)
@@ -164,30 +155,6 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return  (articles.count == 0) ? nil : "Articles"
-    }
-    
-}
-
-extension ArticleListVC: MWFeedParserDelegate {
-    
-    func feedParserDidStart(_ parser: MWFeedParser!) {
-        print("\n\(#function)")
-    }
-    
-    func feedParser(_ parser: MWFeedParser!, didParseFeedInfo info: MWFeedInfo!) { }
-    
-    func feedParser(_ parser: MWFeedParser!, didParseFeedItem item: MWFeedItem!) {
-        articles.append(item)
-    }
-    
-    func feedParserDidFinish(_ parser: MWFeedParser!) {
-        print("\n\(#function)")
-        
-        tableView.reloadData()
-    }
-    
-    func feedParser(_ parser: MWFeedParser!, didFailWithError error: Error!) {
-        print("\n\(#function)")
     }
     
 }

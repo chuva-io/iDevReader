@@ -9,11 +9,13 @@
 import UIKit
 import MWFeedParser.MWFeedItem
 
-class BrowseCoordinator {
+class BrowseCoordinator: NSObject {
     
     let presenter: UINavigationController
     
     fileprivate let bookmarkStore = BookmarkStore()
+    fileprivate var feedParser: MWFeedParser?
+    fileprivate var articleListVC: ArticleListVC?
     
     init(presenter: UINavigationController) {
         let vc = CategoryListVC()
@@ -23,6 +25,7 @@ class BrowseCoordinator {
         self.presenter.navigationBar.prefersLargeTitles = true
         self.presenter.pushViewController(vc, animated: false)
         
+        super.init()
         vc.delegate = self
     }
     
@@ -44,11 +47,44 @@ extension BrowseCoordinator: CategoryListVCDelegate {
 extension BrowseCoordinator: FeedListVCDelegate {
     
     func sender(_ sender: FeedListVC, didSelect feed: Feed) {
-        let articleListVC = ArticleListVC()
-        articleListVC.delegate = self
-        articleListVC.title = feed.author
-        articleListVC.load(feed: feed)
-        presenter.pushViewController(articleListVC, animated: true)
+        articleListVC = ArticleListVC()
+        articleListVC!.delegate = self
+        articleListVC!.title = feed.author
+        load(feed: feed)
+        presenter.pushViewController(articleListVC!, animated: true)
+    }
+    
+    fileprivate func load(feed: Feed) {
+        if let parser = feedParser,
+            parser.isParsing == true {
+            parser.stopParsing()
+        }
+        
+        feedParser = MWFeedParser(feedURL: feed.url)!
+        feedParser!.delegate = self
+        feedParser!.connectionType = ConnectionTypeAsynchronously
+        feedParser!.parse()
+    }
+    
+}
+
+extension BrowseCoordinator: MWFeedParserDelegate {
+    
+    func feedParserDidStart(_ parser: MWFeedParser!) {
+        print("\n\(#function)")
+    }
+    
+    func feedParser(_ parser: MWFeedParser!, didParseFeedItem item: MWFeedItem!) {
+        articleListVC?.insert(item)
+    }
+    
+    func feedParserDidFinish(_ parser: MWFeedParser!) {
+        feedParser = nil
+        print("")
+    }
+    
+    func feedParser(_ parser: MWFeedParser!, didFailWithError error: Error!) {
+        print("\n\(#function)")
     }
     
 }
