@@ -11,7 +11,7 @@ import WebKit
 import MWFeedParser.MWFeedItem
 
 protocol ArticleVCDelegate {
-    func didChangeBookmarkState(of article: MWFeedItem)
+    func sender(_ sender: ArticleVC, didChangeBookmarkStateOf article: MWFeedItem)
 }
 
 class ArticleVC: UIViewController {
@@ -46,7 +46,7 @@ class ArticleVC: UIViewController {
     }
 
     @objc fileprivate func bookmarkButtonTapped() {
-        delegate?.didChangeBookmarkState(of: article)
+        delegate?.sender(self, didChangeBookmarkStateOf: article)
         navigationItem.rightBarButtonItem?.image = bookmarkButtonImage
     }
     

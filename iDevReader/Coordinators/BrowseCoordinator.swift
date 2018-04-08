@@ -80,8 +80,8 @@ extension BrowseCoordinator: ArticleListVCDelegate {
 }
 
 extension BrowseCoordinator: ArticleVCDelegate {
-    
-    func didChangeBookmarkState(of article: MWFeedItem) {
+
+    func sender(_ sender: ArticleVC, didChangeBookmarkStateOf article: MWFeedItem) {
         article.isBookmarked ? bookmarkStore.remove(item: article) : bookmarkStore.insert(item: article)
     }
     
