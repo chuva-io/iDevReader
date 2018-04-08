@@ -13,10 +13,12 @@ class BookmarkCoordinator {
     let rootVC: UIViewController
     let bookmarkStore = BookmarkStore()
     
+    var articleListVC: ArticleListVC?
+    
     init() {
-        let articleListVC = ArticleListVC(articles: bookmarkStore.items, allowsEditing: true)
-        rootVC = articleListVC
-        articleListVC.delegate = self
+        self.articleListVC = ArticleListVC(articles: bookmarkStore.items, allowsEditing: true)
+        self.rootVC = articleListVC!
+        self.articleListVC!.delegate = self
     }
     
 }
@@ -50,7 +52,21 @@ extension BookmarkCoordinator: ArticleListVCDelegate {
 extension BookmarkCoordinator: ArticleVCDelegate {
     
     func sender(_ sender: ArticleVC, didChangeBookmarkStateOf article: MWFeedItem) {
+        // Change state
         article.isBookmarked ? bookmarkStore.remove(item: article) : bookmarkStore.insert(item: article)
+        
+        // Add bookmark
+        if article.isBookmarked {
+            articleListVC?.insert(article)
+        }
+        // Remove bookmark
+        else {
+            guard let index = articleListVC?.articles.index(where: { $0.identifier == article.identifier }) else {
+                return
+            }
+            articleListVC?.delete(article, at: index)
+        }
+        
     }
     
 }

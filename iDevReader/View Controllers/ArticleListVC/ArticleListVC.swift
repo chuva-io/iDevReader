@@ -26,7 +26,7 @@ class ArticleListVC: UIViewController {
     var delegate: ArticleListVCDelegate?
     
     let allowsEditing: Bool
-    var articles: [MWFeedItem] = []
+    private(set) var articles: [MWFeedItem] = []
     
     fileprivate var parser: MWFeedParser?
     fileprivate var expandedIndexPaths: Set<IndexPath> = []
@@ -65,6 +65,21 @@ class ArticleListVC: UIViewController {
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
     
+    func insert(_ article: MWFeedItem) {
+        articles.insert(article, at: 0)
+        
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        tableView.endUpdates()
+    }
+    
+    func delete(_ article: MWFeedItem, at index: Int) {
+        articles.remove(at: index)
+        
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        tableView.endUpdates()
+    }
     
     //MARK: - Selectors
 
