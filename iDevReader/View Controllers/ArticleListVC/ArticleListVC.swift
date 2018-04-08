@@ -12,17 +12,12 @@ import SafariServices
 
 class ArticleListVC: UIViewController {
     
-    enum Configuration {
-        case normal, bookmarks
-    }
-    
     fileprivate static let cellIdentifier = "cell_identifier"
     
-    fileprivate let parser: MWFeedParser?
-    
-    let feed: Feed?
-    let configuration: Configuration
+    let allowsEditing: Bool
     var articles: [MWFeedItem] = []
+    
+    fileprivate var parser: MWFeedParser?
     fileprivate var expandedIndexPaths: Set<IndexPath> = []
     
     fileprivate lazy var emptyView: EmptyState = {
@@ -38,40 +33,34 @@ class ArticleListVC: UIViewController {
         }
     }
     
-    init(feed: Feed) {
-        self.feed = feed
-        self.configuration = .normal
-        self.parser = MWFeedParser(feedURL: feed.url)!
+    func load(feed: Feed) {
+        if let parser = parser,
+            parser.isParsing == true {
+            parser.stopParsing()
+        }
         
-        super.init(nibName: nil, bundle: nil)
+        parser = MWFeedParser(feedURL: feed.url)!
+        parser?.delegate = self
+        parser?.connectionType = ConnectionTypeAsynchronously
+        parser?.parse()
     }
     
-    init(articles: [MWFeedItem] = [], configuration: Configuration = .normal) {
+    init(articles: [MWFeedItem] = [], allowsEditing: Bool = false) {
         self.articles = articles
-        self.configuration = configuration
-        self.parser = nil
-        self.feed = nil
+        self.allowsEditing = allowsEditing
         
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        parser?.delegate = self
-        parser?.connectionType = ConnectionTypeAsynchronously
-        parser?.parse()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if configuration == .bookmarks {
-            articles = BookmarkStore().items
-            tableView.reloadData()
-        }
+//        if configuration == .bookmarks {
+//            articles = BookmarkStore().items
+//            tableView.reloadData()
+//        }
     }
     
     
@@ -163,7 +152,7 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return configuration == .bookmarks ? true : false
+        return allowsEditing
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

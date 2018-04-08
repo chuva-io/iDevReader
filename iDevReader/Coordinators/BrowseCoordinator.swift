@@ -9,19 +9,18 @@
 import UIKit
 
 struct BrowseCoordinator {
-    let rootVC: UIViewController
     
-    fileprivate var navigationVC: UINavigationController {
-        return rootVC as! UINavigationController
-    }
+    let presenter: UINavigationController
     
-    init() {
+    init(presenter: UINavigationController) {
         let vc = CategoryListVC()
         vc.title = "Categories"
-        self.rootVC = UINavigationController(rootViewController: vc)
+        
+        self.presenter = presenter
+        self.presenter.navigationBar.prefersLargeTitles = true
+        self.presenter.pushViewController(vc, animated: false)
         
         vc.delegate = self
-        navigationVC.navigationBar.prefersLargeTitles = true
     }
     
 }
@@ -34,7 +33,7 @@ extension BrowseCoordinator: CategoryListVCDelegate {
         let feedsVC = FeedListVC(feeds: feeds)
         feedsVC.delegate = self
         feedsVC.title = category.title
-        navigationVC.pushViewController(feedsVC, animated: true)
+        presenter.pushViewController(feedsVC, animated: true)
     }
     
 }
@@ -42,9 +41,10 @@ extension BrowseCoordinator: CategoryListVCDelegate {
 extension BrowseCoordinator: FeedListVCDelegate {
     
     func sender(_ sender: FeedListVC, didSelect feed: Feed) {
-        let articleListVC = ArticleListVC(feed: feed)
+        let articleListVC = ArticleListVC(  )
         articleListVC.title = feed.author
-        navigationVC.pushViewController(articleListVC, animated: true)
+        articleListVC.load(feed: feed)
+        presenter.pushViewController(articleListVC, animated: true)
     }
     
 }

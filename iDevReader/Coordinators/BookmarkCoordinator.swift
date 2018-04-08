@@ -13,7 +13,7 @@ struct BookmarkCoordinator {
     
     init() {
         let store = BookmarkStore()
-        rootVC = ArticleListVC(articles: store.items, configuration: .bookmarks)
+        rootVC = ArticleListVC(articles: store.items, allowsEditing: true)
     }
     
 }

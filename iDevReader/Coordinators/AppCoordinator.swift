@@ -18,10 +18,10 @@ struct AppCoordinator {
     init(window: UIWindow) {
         self.window = window
         
-        browseCoordinator = BrowseCoordinator()
+        browseCoordinator = BrowseCoordinator(presenter: UINavigationController())
         bookmarkCoordinator = BookmarkCoordinator()
         
-        tabBarController.viewControllers = [browseCoordinator.rootVC,
+        tabBarController.viewControllers = [browseCoordinator.presenter,
                                             bookmarkCoordinator.rootVC]
         
         self.window.tintColor = Theme.Colors.tintColor
