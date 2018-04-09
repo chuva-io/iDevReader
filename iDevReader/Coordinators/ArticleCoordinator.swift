@@ -19,7 +19,7 @@ class ArticleCoordinator: NSObject {
         articleVC.title = article.title
         
         self.presenter = presenter
-        self.presenter.pushViewController(articleVC, animated: true)
+        self.presenter.pushViewController(articleVC, animated: false)
         self.bookmarkStore = bookmarkStore
         
         super.init()

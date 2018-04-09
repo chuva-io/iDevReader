@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var appCoordinator: AppCoordinator!
-    var appRouter: AppRouter!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -21,10 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator = AppCoordinator(window: window!)
         appCoordinator.start()
         
-        appRouter = AppRouter(coordinator: appCoordinator)
-        
-//        appRouter.route(to: .feed)
-//        appRouter.route(to: .article(article: BookmarkStore().items[0]))
+//        appCoordinator.route(to: .bookmarks)
+//        appCoordinator.route(to: .article(article: BookmarkStore().items[0]))
         
         return true
     }

@@ -22,7 +22,7 @@ class FeedCoordinator: NSObject {
 
         self.presenter = presenter
         self.presenter.navigationBar.prefersLargeTitles = true
-        self.presenter.pushViewController(vc, animated: true)
+        self.presenter.pushViewController(vc, animated: false)
         self.bookmarkStore = bookmarkStore
         
         super.init()
