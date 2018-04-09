@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        appCoordinator.route(to: .bookmarks)
 //        appCoordinator.route(to: .article(article: BookmarkStore().items[0]))
+//        appCoordinator.route(to: .bookmarks)
         
         return true
     }

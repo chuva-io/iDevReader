@@ -48,7 +48,7 @@ class AppCoordinator: NSObject {
 extension AppCoordinator: Routable {
     
     enum Route {
-        case feed
+//        case feed
         case article(article: MWFeedItem)
         case bookmarks
     }
@@ -56,23 +56,23 @@ extension AppCoordinator: Routable {
     func route(to route: Route) {
         switch route {
             
-        case .feed:
-            let navigationController = UINavigationController()
-            feedCoordinator = FeedCoordinator(bookmarkStore: bookmarkStore,
-                                              presenter: navigationController)
-            
-            navigationController
-                .viewControllers[0]
-                .navigationItem
-                .leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                     target: self,
-                                                     action: #selector(dismissFeedCoordinator))
-            
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                navigationController.modalPresentationStyle = .pageSheet
-            }
-            
-            topViewController().present(navigationController, animated: false)
+//        case .feed:
+//            let navigationController = UINavigationController()
+//            feedCoordinator = FeedCoordinator(bookmarkStore: bookmarkStore,
+//                                              presenter: navigationController)
+//            
+//            navigationController
+//                .viewControllers[0]
+//                .navigationItem
+//                .leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+//                                                     target: self,
+//                                                     action: #selector(dismissFeedCoordinator))
+//            
+//            if UIDevice.current.userInterfaceIdiom == .pad {
+//                navigationController.modalPresentationStyle = .pageSheet
+//            }
+//            
+//            topViewController().present(navigationController, animated: false)
             
             
         case let .article(article):
