@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appRouter = AppRouter(coordinator: appCoordinator)
         
-        appRouter.route(to: .feed)
+//        appRouter.route(to: .feed)
+//        appRouter.route(to: .article(article: BookmarkStore().items[0]))
         
         return true
     }
