@@ -8,39 +8,16 @@
 
 import UIKit
 
-enum AppRoute {
-    
-    case browse(Browse)
-    case bookmarks
-    
-    enum Browse {
-        case feed(id: String)
-        case article(id: String)
-    }
-}
-
-class AppRouter {
-    let coordinator: AppCoordinator
-    
-    func route(to route: AppRoute) {
-        print(route)
-    }
-    
-    init(coordinator: AppCoordinator) {
-        self.coordinator = coordinator
-    }
-    
-}
-
-
 class AppCoordinator: NSObject {
     
     let window: UIWindow
     fileprivate let tabBarController = UITabBarController()
+    
     fileprivate let browseCoordinator: BrowseCoordinator
     fileprivate let bookmarkCoordinator: BookmarkCoordinator
+    fileprivate var feedCoordinator: FeedCoordinator?
     
-    fileprivate let bookmarkStore = BookmarkStore()
+    let bookmarkStore = BookmarkStore()
     
     init(window: UIWindow) {
         self.window = window

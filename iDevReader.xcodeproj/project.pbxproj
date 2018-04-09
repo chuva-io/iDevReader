@@ -19,6 +19,8 @@
 		0A5898AB2068777A00245EED /* FeedListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898A92068777A00245EED /* FeedListVC.xib */; };
 		0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898AD20688EFA00245EED /* ArticleListVC.swift */; };
 		0A5898B020688EFA00245EED /* ArticleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898AE20688EFA00245EED /* ArticleListVC.xib */; };
+		0A6CE56C207AEB80001C8A87 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CE56B207AEB80001C8A87 /* FeedCoordinator.swift */; };
+		0A6CE56E207AF0DD001C8A87 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CE56D207AF0DD001C8A87 /* AppRouter.swift */; };
 		0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB02068617500BE3690 /* AppDelegate.swift */; };
 		0A8F4EB82068617500BE3690 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB72068617500BE3690 /* Assets.xcassets */; };
 		0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB92068617500BE3690 /* LaunchScreen.storyboard */; };
@@ -63,6 +65,8 @@
 		0A5898A92068777A00245EED /* FeedListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListVC.xib; sourceTree = "<group>"; };
 		0A5898AD20688EFA00245EED /* ArticleListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVC.swift; sourceTree = "<group>"; };
 		0A5898AE20688EFA00245EED /* ArticleListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleListVC.xib; sourceTree = "<group>"; };
+		0A6CE56B207AEB80001C8A87 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		0A6CE56D207AF0DD001C8A87 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		0A8F4EAD2068617400BE3690 /* iDevReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDevReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8F4EB02068617500BE3690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A8F4EB72068617500BE3690 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 			children = (
 				0A31637720786FB600C50403 /* AppCoordinator.swift */,
 				0A316379207870E100C50403 /* BrowseCoordinator.swift */,
+				0A6CE56B207AEB80001C8A87 /* FeedCoordinator.swift */,
 				0A31637B2078739200C50403 /* BookmarkCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -211,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				0A8F4EB02068617500BE3690 /* AppDelegate.swift */,
+				0A6CE56D207AF0DD001C8A87 /* AppRouter.swift */,
 				0AEEB845206C10BA00F11F2A /* Persistance */,
 				0A569C51206AA080003B4D4D /* Models */,
 				0AEDFD9B2073068800208CA1 /* Views */,
@@ -523,6 +529,7 @@
 				2C1AD8A320772E030087C3BF /* EmptyState.swift in Sources */,
 				0A569C57206AA4B4003B4D4D /* ArticleVC.swift in Sources */,
 				0A569C53206AA080003B4D4D /* Category.swift in Sources */,
+				0A6CE56C207AEB80001C8A87 /* FeedCoordinator.swift in Sources */,
 				0A31637A207870E100C50403 /* BrowseCoordinator.swift in Sources */,
 				0A31637820786FB600C50403 /* AppCoordinator.swift in Sources */,
 				2C1AD89B20770E890087C3BF /* Theme.swift in Sources */,
@@ -530,6 +537,7 @@
 				0AEEB847206C114200F11F2A /* BookmarkStore.swift in Sources */,
 				0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */,
 				0A5898A4206873CF00245EED /* CategoryListVC.swift in Sources */,
+				0A6CE56E207AF0DD001C8A87 /* AppRouter.swift in Sources */,
 				0AEDFDA32073155800208CA1 /* FeedTableViewCell.swift in Sources */,
 				0A31637C2078739200C50403 /* BookmarkCoordinator.swift in Sources */,
 				0AEDFD9F207306BD00208CA1 /* CategoryTableViewCell.swift in Sources */,

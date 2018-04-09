@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appRouter = AppRouter(coordinator: appCoordinator)
         
-        appRouter.route(to: .bookmarks)
+        appRouter.route(to: .feed)
         
         return true
     }
