@@ -80,6 +80,7 @@ extension AppCoordinator: Routable {
             articleCoordinator = ArticleCoordinator(article: article,
                                                     bookmarkStore: bookmarkStore,
                                                     presenter: navigationController)
+            articleCoordinator!.start()
             
             navigationController
                 .viewControllers[0]

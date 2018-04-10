@@ -52,17 +52,10 @@ class FeedCoordinator: NSObject {
 extension FeedCoordinator: ArticleListVCDelegate {
     
     func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem) {
-        let articleVC = ArticleVC(article: article)
-        articleVC.delegate = self
-        presenter.pushViewController(articleVC, animated: true)
-    }
-    
-}
-
-extension FeedCoordinator: ArticleVCDelegate {
-    
-    func sender(_ sender: ArticleVC, didChangeBookmarkStateOf article: MWFeedItem) {
-        article.isBookmarked ? bookmarkStore.remove(item: article) : bookmarkStore.insert(item: article)
+        let coordinator = ArticleCoordinator(article: article,
+                                             bookmarkStore: bookmarkStore,
+                                             presenter: presenter)
+        coordinator.start()
     }
     
 }

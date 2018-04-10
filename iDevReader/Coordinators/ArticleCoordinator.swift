@@ -13,17 +13,21 @@ class ArticleCoordinator: NSObject {
     
     let presenter: UINavigationController
     let bookmarkStore: BookmarkStore
+    fileprivate let articleVC: ArticleVC
     
     init(article: MWFeedItem, bookmarkStore: BookmarkStore, presenter: UINavigationController) {
-        let articleVC = ArticleVC(article: article)
+        articleVC = ArticleVC(article: article)
         articleVC.title = article.title
         
         self.presenter = presenter
-        self.presenter.pushViewController(articleVC, animated: false)
         self.bookmarkStore = bookmarkStore
         
         super.init()
         articleVC.delegate = self
+    }
+    
+    func start() {
+        presenter.pushViewController(articleVC, animated: true)
     }
     
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MWFeedParser.MWFeedItem
 
 class BrowseCoordinator: NSObject {
     
