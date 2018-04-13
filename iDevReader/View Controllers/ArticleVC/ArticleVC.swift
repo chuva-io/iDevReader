@@ -8,22 +8,15 @@
 
 import UIKit
 import WebKit
-import MWFeedParser.MWFeedItem
-
-protocol ArticleVCDelegate {
-    func sender(_ sender: ArticleVC, didChangeBookmarkStateOf article: MWFeedItem)
-}
 
 class ArticleVC: UIViewController {
     
-    var delegate: ArticleVCDelegate?
-
-    let article: MWFeedItem
+    let url: URL
     
     @IBOutlet fileprivate weak var webView: WKWebView!
     
-    init(article: MWFeedItem) {
-        self.article = article
+    init(url: URL) {
+        self.url = url
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,22 +25,7 @@ class ArticleVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: bookmarkButtonImage,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(bookmarkButtonTapped))
-        
-        webView.load(URLRequest(url: URL(string: article.link)!))
-    }
-    
-    fileprivate var bookmarkButtonImage: UIImage? {
-        return article.isBookmarked ? UIImage(named: "bookmarkOn") : UIImage(named: "bookmarkOff")
-    }
-
-    @objc fileprivate func bookmarkButtonTapped() {
-        delegate?.sender(self, didChangeBookmarkStateOf: article)
-        navigationItem.rightBarButtonItem?.image = bookmarkButtonImage
+        webView.load(URLRequest(url: url))
     }
     
 }
