@@ -48,7 +48,6 @@ class AppCoordinator: NSObject {
 extension AppCoordinator: Routable {
     
     enum Route {
-//        case feed
         case article(article: MWFeedItem)
         case bookmarks
     }
@@ -56,27 +55,11 @@ extension AppCoordinator: Routable {
     func route(to route: Route) {
         switch route {
             
-//        case .feed:
-//            let navigationController = UINavigationController()
-//            feedCoordinator = FeedCoordinator(bookmarkStore: bookmarkStore,
-//                                              presenter: navigationController)
-//            
-//            navigationController
-//                .viewControllers[0]
-//                .navigationItem
-//                .leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-//                                                     target: self,
-//                                                     action: #selector(dismissFeedCoordinator))
-//            
-//            if UIDevice.current.userInterfaceIdiom == .pad {
-//                navigationController.modalPresentationStyle = .pageSheet
-//            }
-//            
-//            topViewController().present(navigationController, animated: false)
-            
-            
         case let .article(article):
+            dismissArticleCoordinator()
+            
             let navigationController = UINavigationController()
+            navigationController.modalPresentationStyle = .pageSheet
             articleCoordinator = ArticleCoordinator(article: article,
                                                     bookmarkStore: bookmarkStore,
                                                     presenter: navigationController)
@@ -89,38 +72,17 @@ extension AppCoordinator: Routable {
                                                      target: self,
                                                      action: #selector(dismissArticleCoordinator))
             
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                navigationController.modalPresentationStyle = .pageSheet
-            }
-            
-            topViewController().present(navigationController, animated: false)
+            tabBarController.present(navigationController, animated: false)
 
             
         case .bookmarks:
-            if articleCoordinator == nil,
-                feedCoordinator == nil {
-                tabBarController.selectedIndex = 1
-            }
-            else {
-                let coordinator = BookmarkCoordinator(bookmarkStore: bookmarkStore)
-                let navigationController = UINavigationController(rootViewController: coordinator.rootVC)
-                
-                coordinator.rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                                                      target: self,
-                                                                                      action: #selector(dismissTopViewController))
-
-                if UIDevice.current.userInterfaceIdiom == .pad {
-                    navigationController.modalPresentationStyle = .pageSheet
-                }
-                
-                topViewController().present(navigationController, animated: false)
-            }
-            
+            dismissArticleCoordinator()
+            dismissFeedCoordinator()
+            tabBarController.selectedIndex = 1
         }
     }
     
     @objc fileprivate func dismissFeedCoordinator() {
-        dismissTopViewController()
         feedCoordinator?.presenter.dismiss(animated: true, completion: nil)
         feedCoordinator = nil
     }
@@ -129,19 +91,7 @@ extension AppCoordinator: Routable {
         articleCoordinator?.presenter.dismiss(animated: true, completion: nil)
         articleCoordinator = nil
     }
-    
-    @objc func dismissTopViewController() {
-        topViewController().dismiss(animated: true)
-    }
-    
-    fileprivate func topViewController() -> UIViewController {
-        var topVC: UIViewController = tabBarController
-        while let newTop = topVC.presentedViewController {
-            topVC = newTop
-        }
-        return topVC
-    }
-    
+        
 }
 
 extension AppCoordinator: UITabBarControllerDelegate {

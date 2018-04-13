@@ -20,10 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator = AppCoordinator(window: window!)
         appCoordinator.start()
 
-//        appCoordinator.route(to: .bookmarks)
-//        appCoordinator.route(to: .article(article: BookmarkStore().items[0]))
-//        appCoordinator.route(to: .bookmarks)
-
         return true
     }
 
