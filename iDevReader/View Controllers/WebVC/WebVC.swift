@@ -1,5 +1,5 @@
 //
-//  ArticleVC.swift
+//  WebVC.swift
 //  iDevReader
 //
 //  Created by Nilson Nascimento on 3/27/18.
@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ArticleVC: UIViewController {
+class WebVC: UIViewController {
     
     let url: URL
     

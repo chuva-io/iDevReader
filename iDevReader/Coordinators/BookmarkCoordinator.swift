@@ -14,6 +14,7 @@ class BookmarkCoordinator {
     let bookmarkStore: BookmarkStore
     
     fileprivate var articleListVC: ArticleListVC?
+    fileprivate var articleCoordinator: ArticleCoordinator? // retain for target-action
     
     func updateBookmarks() {
         articleListVC?.set(articles: bookmarkStore.items)
@@ -31,35 +32,38 @@ class BookmarkCoordinator {
 extension BookmarkCoordinator: ArticleListVCDelegate {
     
     func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem) {
-        let articleVC = ArticleVC(article: article)
-        articleVC.delegate = self
+        let navController = UINavigationController()
+        articleCoordinator = ArticleCoordinator(article: article, bookmarkStore: bookmarkStore, presenter: navController)
+        articleCoordinator!.delegate = self
+        articleCoordinator!.start()
         
-        let navVC = UINavigationController(rootViewController: articleVC)
-        articleVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                                     target: self,
-                                                                     action: #selector(dismissArticleVC))
+        navController
+            .viewControllers[0]
+            .navigationItem
+            .leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                 target: self,
+                                                 action: #selector(dismissArticleCoordinator))
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
-            navVC.modalPresentationStyle = .pageSheet
+            articleCoordinator!.presenter.modalPresentationStyle = .pageSheet
         }
-        rootVC.present(navVC, animated: true)
+        
+        rootVC.present(navController, animated: true)
     }
     
     func sender(_ sender: ArticleListVC, didDelete article: MWFeedItem) {
         bookmarkStore.remove(item: article)
     }
     
-    @objc fileprivate func dismissArticleVC() {
+    @objc fileprivate func dismissArticleCoordinator() {
         rootVC.dismiss(animated: true, completion: nil)
     }
     
 }
 
-extension BookmarkCoordinator: ArticleVCDelegate {
+extension BookmarkCoordinator: ArticleCoordinatorDelegate {
     
-    func sender(_ sender: ArticleVC, didChangeBookmarkStateOf article: MWFeedItem) {
-        // Change state
-        article.isBookmarked ? bookmarkStore.remove(item: article) : bookmarkStore.insert(item: article)
-        
+    func sender(_ sender: ArticleCoordinator, didChangeBookmarkStateOf article: MWFeedItem) {
         // Add bookmark
         if article.isBookmarked {
             articleListVC?.insert(article)

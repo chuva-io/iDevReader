@@ -17,6 +17,7 @@ class FeedCoordinator: NSObject {
     fileprivate var feedParser: MWFeedParser?
     
     fileprivate let articleListVC: ArticleListVC
+    var articleCoordinator: ArticleCoordinator?  // retain for target-action
     
     init(feed: Feed, bookmarkStore: BookmarkStore, presenter: UINavigationController) {
         articleListVC = ArticleListVC()
@@ -52,10 +53,10 @@ class FeedCoordinator: NSObject {
 extension FeedCoordinator: ArticleListVCDelegate {
     
     func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem) {
-        let coordinator = ArticleCoordinator(article: article,
-                                             bookmarkStore: bookmarkStore,
-                                             presenter: presenter)
-        coordinator.start()
+        articleCoordinator = ArticleCoordinator(article: article,
+                                                bookmarkStore: bookmarkStore,
+                                                presenter: presenter)
+        articleCoordinator!.start()
     }
     
 }
