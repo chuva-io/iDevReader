@@ -131,6 +131,7 @@
 		0A569C51206AA080003B4D4D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0AEEB845206C10BA00F11F2A /* Persistance */,
 				0A569C52206AA080003B4D4D /* Category.swift */,
 			);
 			path = Models;
@@ -220,7 +221,6 @@
 			children = (
 				0A8F4EB02068617500BE3690 /* AppDelegate.swift */,
 				0A925250207AFE0A00575899 /* Protocols */,
-				0AEEB845206C10BA00F11F2A /* Persistance */,
 				0A569C51206AA080003B4D4D /* Models */,
 				0AEDFD9B2073068800208CA1 /* Views */,
 				0A5898A12068739D00245EED /* View Controllers */,

@@ -10,7 +10,7 @@ import UIKit
 import MWFeedParser.MWFeedItem
 import SafariServices
 
-protocol ArticleListVCDelegate {
+protocol ArticleListVCDelegate: class {
     func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem)
     func sender(_ sender: ArticleListVC, didDelete article: MWFeedItem)
 }
@@ -23,7 +23,7 @@ class ArticleListVC: UIViewController {
     
     fileprivate static let cellIdentifier = "cell_identifier"
     
-    var delegate: ArticleListVCDelegate?
+    weak var delegate: ArticleListVCDelegate?
     
     let allowsEditing: Bool
     private(set) var articles: [MWFeedItem] = []

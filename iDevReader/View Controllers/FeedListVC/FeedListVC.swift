@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FeedListVCDelegate {
+protocol FeedListVCDelegate: class {
     func sender(_ sender: FeedListVC, didSelect feed: Feed)
 }
 
@@ -16,7 +16,7 @@ class FeedListVC: UIViewController {
 
     fileprivate static let cellIdentifier = "cell_identifier"
     
-    var delegate: FeedListVCDelegate?
+    weak var delegate: FeedListVCDelegate?
 
     @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
