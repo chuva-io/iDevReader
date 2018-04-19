@@ -20,7 +20,7 @@
 		0A5898AB2068777A00245EED /* FeedListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898A92068777A00245EED /* FeedListVC.xib */; };
 		0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5898AD20688EFA00245EED /* ArticleListVC.swift */; };
 		0A5898B020688EFA00245EED /* ArticleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5898AE20688EFA00245EED /* ArticleListVC.xib */; };
-		0A66FA752086E81200AF9706 /* FeedListVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66FA742086E81200AF9706 /* FeedListVCTests.swift */; };
+		0A66FA752086E81200AF9706 /* FeedListVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66FA742086E81200AF9706 /* FeedListVMTests.swift */; };
 		0A6CE56C207AEB80001C8A87 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CE56B207AEB80001C8A87 /* FeedCoordinator.swift */; };
 		0A6CE572207AF85E001C8A87 /* ArticleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CE571207AF85E001C8A87 /* ArticleCoordinator.swift */; };
 		0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB02068617500BE3690 /* AppDelegate.swift */; };
@@ -68,7 +68,7 @@
 		0A5898A92068777A00245EED /* FeedListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedListVC.xib; sourceTree = "<group>"; };
 		0A5898AD20688EFA00245EED /* ArticleListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVC.swift; sourceTree = "<group>"; };
 		0A5898AE20688EFA00245EED /* ArticleListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleListVC.xib; sourceTree = "<group>"; };
-		0A66FA742086E81200AF9706 /* FeedListVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListVCTests.swift; sourceTree = "<group>"; };
+		0A66FA742086E81200AF9706 /* FeedListVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListVMTests.swift; sourceTree = "<group>"; };
 		0A6CE56B207AEB80001C8A87 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		0A6CE571207AF85E001C8A87 /* ArticleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCoordinator.swift; sourceTree = "<group>"; };
 		0A8F4EAD2068617400BE3690 /* iDevReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDevReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,7 +244,7 @@
 		0A8F4EC42068617500BE3690 /* iDevReaderTests */ = {
 			isa = PBXGroup;
 			children = (
-				0A66FA742086E81200AF9706 /* FeedListVCTests.swift */,
+				0A66FA742086E81200AF9706 /* FeedListVMTests.swift */,
 				0A8F4EC72068617500BE3690 /* Info.plist */,
 			);
 			path = iDevReaderTests;
@@ -572,7 +572,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A66FA752086E81200AF9706 /* FeedListVCTests.swift in Sources */,
+				0A66FA752086E81200AF9706 /* FeedListVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

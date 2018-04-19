@@ -12,16 +12,21 @@ protocol FeedListVMDelegate {
 
 class FeedListVM {
     
-    var delegate: FeedListVMDelegate?
-
+    // Inputs
     let feeds: [Feed]
+    func selectItem(at index: Int) {
+        let selected = feeds[index]
+        selectedFeed = selected
+        delegate?.sender(self, didSelect: selected)
+    }
+    
+    // Outputs
+    private(set) var selectedFeed: Feed?
+    
+    var delegate: FeedListVMDelegate?
     
     init(feeds: [Feed]) {
         self.feeds = feeds
-    }
-    
-    func selectItem(at index: Int) {
-        delegate?.sender(self, didSelect: feeds[index])
     }
     
 }
