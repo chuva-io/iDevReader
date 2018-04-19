@@ -8,7 +8,6 @@
 
 import UIKit
 import MWFeedParser.MWFeedItem
-import SafariServices
 
 protocol ArticleListVCDelegate: class {
     func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem)
