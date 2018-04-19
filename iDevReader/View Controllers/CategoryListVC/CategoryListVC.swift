@@ -8,27 +8,18 @@
 
 import UIKit
 
-protocol CategoryListVCDelegate {
-    func sender(_ sender: CategoryListVC, didSelect category: Category)
-}
-
 class CategoryListVC: UIViewController {
     
     fileprivate static let cellIdentifier = "cell_identifier"
     
-    var delegate: CategoryListVCDelegate?
+    let vm: CategoryListVM
     
-    init() {
+    init(viewModel: CategoryListVM) {
+        vm = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
-    
-    fileprivate var categories: [Category] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     
     @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
@@ -45,18 +36,9 @@ class CategoryListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        URLSession.shared.dataTask(with: URL(string: "https://raw.githubusercontent.com/daveverwer/iOSDevDirectory/master/content.json")!) { data, response, error in
-            guard let data = data,
-                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [[String: AnyObject]],
-                let english = json.first(where: { item in
-                    guard let language = item["language"] as? String else { return false }
-                    return language == "en"
-                }) else { return }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.categories = (try? JSONDecoder().decode([Category].self, from: JSONSerialization.data(withJSONObject: english["categories"] as Any, options: []))) ?? []
-            }
-            }.resume()
+        vm.loadCategories { [unowned self] in
+            self.tableView.reloadData()
+        }
     }
 
 }
@@ -65,17 +47,16 @@ extension CategoryListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        delegate?.sender(self, didSelect: categories[indexPath.row])
+        vm.selectItem(at: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return vm.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CategoryListVC.cellIdentifier, for: indexPath) as! CategoryTableViewCell
-        let category = categories[indexPath.row]
+        let category = vm.categories[indexPath.row]
 
         cell.titleLabel.text = category.title
         cell.descriptionLabel.text = category.description

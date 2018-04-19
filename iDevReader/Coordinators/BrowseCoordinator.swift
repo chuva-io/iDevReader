@@ -13,10 +13,11 @@ class BrowseCoordinator: NSObject {
     let presenter: UINavigationController
     let bookmarkStore: BookmarkStore
     
-    weak var feedCoordinator: FeedCoordinator?
+    var feedCoordinator: FeedCoordinator?
     
     init(presenter: UINavigationController, bookmarkStore: BookmarkStore) {
-        let vc = CategoryListVC()
+        let vm = CategoryListVM()
+        let vc = CategoryListVC(viewModel: vm)
         vc.title = "Categories"
         
         self.presenter = presenter
@@ -25,15 +26,15 @@ class BrowseCoordinator: NSObject {
         self.bookmarkStore = bookmarkStore
         
         super.init()
-        vc.delegate = self
+        vm.delegate = self
     }
     
 }
 
 
-extension BrowseCoordinator: CategoryListVCDelegate {
+extension BrowseCoordinator: CategoryListVMDelegate {
     
-    func sender(_ sender: CategoryListVC, didSelect category: Category) {
+    func sender(_ sender: CategoryListVM, didSelect category: Category) {
         let feeds = category.feeds
         let vm = FeedListVM(feeds: feeds)
         vm.delegate = self

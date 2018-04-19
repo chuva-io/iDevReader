@@ -14,14 +14,16 @@ class FeedListVM {
     
     // Inputs
     let feeds: [Feed]
+    
     func selectItem(at index: Int) {
         let selected = feeds[index]
         selectedFeed = selected
-        delegate?.sender(self, didSelect: selected)
     }
     
     // Outputs
-    private(set) var selectedFeed: Feed?
+    private(set) var selectedFeed: Feed? {
+        didSet { delegate?.sender(self, didSelect: selectedFeed!) }
+    }
     
     var delegate: FeedListVMDelegate?
     
