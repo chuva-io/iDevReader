@@ -18,7 +18,7 @@ class FeedListVC: UIViewController {
     
     weak var delegate: FeedListVCDelegate?
 
-    @IBOutlet fileprivate weak var tableView: UITableView! {
+    @IBOutlet weak private(set) var tableView: UITableView! {
         didSet {
             let nib = UINib(nibName: "FeedTableViewCell", bundle: nil)
             tableView.register(nib, forCellReuseIdentifier: FeedListVC.cellIdentifier)

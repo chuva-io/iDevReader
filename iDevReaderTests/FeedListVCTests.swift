@@ -42,7 +42,8 @@ class FeedListVCTests: XCTestCase {
     
     func testDidSelectDelegate() {
         vc.delegate = self
-//        vc.tableView(vc.table, didSelectRowAt: <#T##IndexPath#>)
+        vc.tableView(vc.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        XCTAssertEqual(didSelectFeedCallbackValue, feeds[0])
     }
 
 }
