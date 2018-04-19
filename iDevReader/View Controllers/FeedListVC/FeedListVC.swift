@@ -8,15 +8,9 @@
 
 import UIKit
 
-protocol FeedListVCDelegate: class {
-    func sender(_ sender: FeedListVC, didSelect feed: Feed)
-}
-
 class FeedListVC: UIViewController {
 
     fileprivate static let cellIdentifier = "cell_identifier"
-    
-    weak var delegate: FeedListVCDelegate?
 
     @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
@@ -28,10 +22,10 @@ class FeedListVC: UIViewController {
         }
     }
 
-    let feeds: [Feed]
+    let vm: FeedListVM
 
-    init(feeds: [Feed]) {
-        self.feeds = feeds
+    init(viewModel: FeedListVM) {
+        vm = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -42,20 +36,20 @@ class FeedListVC: UIViewController {
 extension FeedListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        delegate?.sender(self, didSelect: feeds[indexPath.row])
+        vm.selectItem(at: indexPath.row)
     }
 }
 
 extension FeedListVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feeds.count
+        return vm.feeds.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FeedListVC.cellIdentifier, for: indexPath) as! FeedTableViewCell
-        let feed = feeds[indexPath.row]
+        
+        let feed = vm.feeds[indexPath.row]
 
         cell.titleLabel.text = feed.title
         cell.authorLabel.text = feed.author

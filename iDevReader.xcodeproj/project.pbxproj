@@ -10,6 +10,7 @@
 		0A31637820786FB600C50403 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31637720786FB600C50403 /* AppCoordinator.swift */; };
 		0A31637A207870E100C50403 /* BrowseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A316379207870E100C50403 /* BrowseCoordinator.swift */; };
 		0A31637C2078739200C50403 /* BookmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31637B2078739200C50403 /* BookmarkCoordinator.swift */; };
+		0A566BBB20881BC50026225E /* FeedListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A566BBA20881BC50026225E /* FeedListVM.swift */; };
 		0A569C53206AA080003B4D4D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A569C52206AA080003B4D4D /* Category.swift */; };
 		0A569C57206AA4B4003B4D4D /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A569C55206AA4B4003B4D4D /* WebVC.swift */; };
 		0A569C58206AA4B4003B4D4D /* WebVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A569C56206AA4B4003B4D4D /* WebVC.xib */; };
@@ -57,6 +58,7 @@
 		0A31637720786FB600C50403 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0A316379207870E100C50403 /* BrowseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCoordinator.swift; sourceTree = "<group>"; };
 		0A31637B2078739200C50403 /* BookmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCoordinator.swift; sourceTree = "<group>"; };
+		0A566BBA20881BC50026225E /* FeedListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListVM.swift; sourceTree = "<group>"; };
 		0A569C52206AA080003B4D4D /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		0A569C55206AA4B4003B4D4D /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		0A569C56206AA4B4003B4D4D /* WebVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebVC.xib; sourceTree = "<group>"; };
@@ -126,6 +128,14 @@
 				0A31637B2078739200C50403 /* BookmarkCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		0A566BB920881B460026225E /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				0A566BBA20881BC50026225E /* FeedListVM.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		0A569C51206AA080003B4D4D /* Models */ = {
@@ -222,6 +232,7 @@
 				0A8F4EB02068617500BE3690 /* AppDelegate.swift */,
 				0A925250207AFE0A00575899 /* Protocols */,
 				0A569C51206AA080003B4D4D /* Models */,
+				0A566BB920881B460026225E /* View Models */,
 				0AEDFD9B2073068800208CA1 /* Views */,
 				0A5898A12068739D00245EED /* View Controllers */,
 				0A31637620786FA000C50403 /* Coordinators */,
@@ -544,6 +555,7 @@
 				0A31637A207870E100C50403 /* BrowseCoordinator.swift in Sources */,
 				0A31637820786FB600C50403 /* AppCoordinator.swift in Sources */,
 				2C1AD89B20770E890087C3BF /* Theme.swift in Sources */,
+				0A566BBB20881BC50026225E /* FeedListVM.swift in Sources */,
 				0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */,
 				0AEEB847206C114200F11F2A /* BookmarkStore.swift in Sources */,
 				0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */,

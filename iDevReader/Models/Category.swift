@@ -70,5 +70,15 @@ struct Feed: Decodable {
         site = URL(string: try values.decode(String.self, forKey: .site))!
         twitter = URL(string: (try? values.decode(String.self, forKey: .twitter)) ?? "") ?? nil
     }
-    
+
+}
+
+extension Feed: Equatable {
+    static func ==(lhs: Feed, rhs: Feed) -> Bool {
+        return lhs.title == rhs.title &&
+            lhs.author == rhs.author &&
+            lhs.url == rhs.url &&
+            lhs.site == rhs.site &&
+            lhs.twitter == rhs.twitter
+    }
 }
