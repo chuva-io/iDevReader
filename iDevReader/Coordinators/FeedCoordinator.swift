@@ -22,6 +22,8 @@ class FeedCoordinator: NSObject {
     init(feed: Feed, bookmarkStore: BookmarkStore, presenter: UINavigationController) {
         let vm = ArticleListVM(bookmarkStore: bookmarkStore)
         articleListVC = ArticleListVC(viewModel: vm)
+        articleListVC.allowsExpansion = true
+        articleListVC.descriptionLineCount = 4
         articleListVC.title = "Articles"
         
         self.feed = feed

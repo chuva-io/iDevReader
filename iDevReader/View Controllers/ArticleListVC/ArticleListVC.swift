@@ -15,6 +15,8 @@ class ArticleListVC: UIViewController {
     let vm: ArticleListVM
     let allowsEditing: Bool
     var headerTitle: String?
+    var descriptionLineCount = 0
+    var allowsExpansion = false
     
     fileprivate var expandedIndexPaths: Set<IndexPath> = []
     
@@ -68,16 +70,13 @@ class ArticleListVC: UIViewController {
                 return
         }
         
-        if expandedIndexPaths.contains(indexpath) { // collapse
-            cell.descriptionLabel.numberOfLines = 4
-            cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
+        if expandedIndexPaths.contains(indexpath) {
             expandedIndexPaths.remove(indexpath)
         }
-        else {  // expand
-            cell.descriptionLabel.numberOfLines = 0
-            cell.showMoreButton.setTitle(ArticleTableViewCell.showLessText, for: .normal)
+        else {
             expandedIndexPaths.insert(indexpath)
         }
+        handleExpansion(for: cell, at: indexpath)
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -112,19 +111,7 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.dateLabel.text = dateString
         
-        if expandedIndexPaths.contains(indexPath) { // collapse
-            cell.descriptionLabel.numberOfLines = 0
-            cell.showMoreButton.setTitle(ArticleTableViewCell.showLessText, for: .normal)
-        }
-        else {  // expand
-            cell.descriptionLabel.numberOfLines = 4
-            
-            if cell.descriptionLabel.isTruncated {
-                cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
-                cell.showMoreButton.addTarget(self, action: #selector(showMoreButtonTapped(_:forEvent:)), for: .touchUpInside)
-                cell.showMoreButton.isHidden = false
-            }
-        }
+        handleExpansion(for: cell, at: indexPath)
         
         return cell
     }
@@ -141,4 +128,31 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
         return  (vm.articles.count == 0) ? nil : headerTitle ?? nil
     }
     
+}
+
+extension ArticleListVC {
+    fileprivate func handleExpansion(`for` cell: ArticleTableViewCell, at indexPath: IndexPath) {
+        cell.descriptionLabel.numberOfLines = descriptionLineCount
+        
+        if allowsExpansion == true &&
+            descriptionLineCount > 0 {
+            
+            if expandedIndexPaths.contains(indexPath) {
+                // expand
+                cell.descriptionLabel.numberOfLines = 0
+                cell.showMoreButton.setTitle(ArticleTableViewCell.showLessText, for: .normal)
+            }
+            else {
+                // collapse
+                cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
+                
+                if cell.descriptionLabel.isTruncated {
+                    cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
+                    cell.showMoreButton.addTarget(self, action: #selector(showMoreButtonTapped(_:forEvent:)), for: .touchUpInside)
+                    cell.showMoreButton.isHidden = false
+                }
+            }
+            
+        }
+    }
 }

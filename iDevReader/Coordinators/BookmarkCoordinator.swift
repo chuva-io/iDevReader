@@ -23,10 +23,12 @@ class BookmarkCoordinator {
     init(bookmarkStore: BookmarkStore) {
         self.bookmarkStore = bookmarkStore
         let vm = ArticleListVM(articles: bookmarkStore.items, bookmarkStore: bookmarkStore)
-        self.articleListVC = ArticleListVC(viewModel: vm, allowsEditing: true)
-        self.articleListVC?.headerTitle = "Articles"
-        self.rootVC = articleListVC!
-        self.articleListVC!.vm.delegate = self
+        articleListVC = ArticleListVC(viewModel: vm, allowsEditing: true)
+        articleListVC!.allowsExpansion = true
+        articleListVC!.descriptionLineCount = 4
+        articleListVC!.headerTitle = "Articles"
+        rootVC = articleListVC!
+        articleListVC!.vm.delegate = self
     }
     
 }
