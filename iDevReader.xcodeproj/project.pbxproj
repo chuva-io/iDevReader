@@ -30,6 +30,8 @@
 		0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB92068617500BE3690 /* LaunchScreen.storyboard */; };
 		0A92524F207AFDFA00575899 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92524E207AFDFA00575899 /* Routable.swift */; };
 		0AC1B7E2208AC53000483606 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1B7E1208AC53000483606 /* UILabel+.swift */; };
+		0AC1B7E5208AD4E900483606 /* ArticleListVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1B7E4208AD4E900483606 /* ArticleListVMTests.swift */; };
+		0AC1B7E7208AD55700483606 /* ArticleListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1B7E6208AD55700483606 /* ArticleListVM.swift */; };
 		0AEDFDA32073155800208CA1 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA12073155800208CA1 /* FeedTableViewCell.swift */; };
 		0AEDFDA42073155800208CA1 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA22073155800208CA1 /* FeedTableViewCell.xib */; };
 		0AEDFDA920731CC000208CA1 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA720731CC000208CA1 /* ArticleTableViewCell.swift */; };
@@ -83,6 +85,8 @@
 		0A8F4EC72068617500BE3690 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A92524E207AFDFA00575899 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		0AC1B7E1208AC53000483606 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		0AC1B7E4208AD4E900483606 /* ArticleListVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVMTests.swift; sourceTree = "<group>"; };
+		0AC1B7E6208AD55700483606 /* ArticleListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVM.swift; sourceTree = "<group>"; };
 		0AEDFDA12073155800208CA1 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		0AEDFDA22073155800208CA1 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		0AEDFDA720731CC000208CA1 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -135,8 +139,9 @@
 		0A566BB920881B460026225E /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				0A566BBA20881BC50026225E /* FeedListVM.swift */,
 				0A5DD0C72088356900275C45 /* CategoryListVM.swift */,
+				0A566BBA20881BC50026225E /* FeedListVM.swift */,
+				0AC1B7E6208AD55700483606 /* ArticleListVM.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			children = (
 				0A66FA742086E81200AF9706 /* FeedListVMTests.swift */,
 				0A5DD0C9208842E800275C45 /* CategoryListVMTests.swift */,
+				0AC1B7E4208AD4E900483606 /* ArticleListVMTests.swift */,
 				0A8F4EC72068617500BE3690 /* Info.plist */,
 			);
 			path = iDevReaderTests;
@@ -571,6 +577,7 @@
 				0A8F4EB12068617500BE3690 /* AppDelegate.swift in Sources */,
 				0AEEB847206C114200F11F2A /* BookmarkStore.swift in Sources */,
 				0A5898AF20688EFA00245EED /* ArticleListVC.swift in Sources */,
+				0AC1B7E7208AD55700483606 /* ArticleListVM.swift in Sources */,
 				0A5DD0C82088356900275C45 /* CategoryListVM.swift in Sources */,
 				0A5898A4206873CF00245EED /* CategoryListVC.swift in Sources */,
 				0A6CE572207AF85E001C8A87 /* ArticleCoordinator.swift in Sources */,
@@ -585,6 +592,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A5DD0CA208842E800275C45 /* CategoryListVMTests.swift in Sources */,
+				0AC1B7E5208AD4E900483606 /* ArticleListVMTests.swift in Sources */,
 				0A66FA752086E81200AF9706 /* FeedListVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

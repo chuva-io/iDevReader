@@ -17,22 +17,27 @@ class BookmarkCoordinator {
     fileprivate var articleCoordinator: ArticleCoordinator? // retain for target-action
     
     func updateBookmarks() {
-        articleListVC?.set(articles: bookmarkStore.items)
+        articleListVC?.vm.set(articles: bookmarkStore.items)
     }
     
     init(bookmarkStore: BookmarkStore) {
         self.bookmarkStore = bookmarkStore
-        self.articleListVC = ArticleListVC(articles: bookmarkStore.items, allowsEditing: true)
+        let vm = ArticleListVM(articles: bookmarkStore.items, bookmarkStore: bookmarkStore)
+        self.articleListVC = ArticleListVC(viewModel: vm, allowsEditing: true)
         self.articleListVC?.headerTitle = "Articles"
         self.rootVC = articleListVC!
-        self.articleListVC!.delegate = self
+        self.articleListVC!.vm.delegate = self
     }
     
 }
 
-extension BookmarkCoordinator: ArticleListVCDelegate {
+extension BookmarkCoordinator: ArticleListVMDelegate {
     
-    func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem) {
+    func sender(_ sender: ArticleListVM, set articles: [MWFeedItem]) {
+        articleListVC?.reload()
+    }
+    
+    func sender(_ sender: ArticleListVM, selected article: MWFeedItem) {
         let navController = UINavigationController()
         articleCoordinator = ArticleCoordinator(article: article, bookmarkStore: bookmarkStore, presenter: navController)
         articleCoordinator!.delegate = self
@@ -52,7 +57,9 @@ extension BookmarkCoordinator: ArticleListVCDelegate {
         rootVC.present(navController, animated: true)
     }
     
-    func sender(_ sender: ArticleListVC, didDelete article: MWFeedItem) {
+    func sender(_ sender: ArticleListVM, inserted article: MWFeedItem, at index: Int) {  }
+    
+    func sender(_ sender: ArticleListVM, deleted article: MWFeedItem, at index: Int) {
         bookmarkStore.remove(item: article)
     }
     
@@ -67,14 +74,15 @@ extension BookmarkCoordinator: ArticleCoordinatorDelegate {
     func sender(_ sender: ArticleCoordinator, didChangeBookmarkStateOf article: MWFeedItem) {
         // Add bookmark
         if article.isBookmarked {
-            articleListVC?.insert(article)
+            guard let vm = articleListVC?.vm else { return }
+            vm.insert(article, at: vm.articles.count)
         }
         // Remove bookmark
         else {
-            guard let index = articleListVC?.articles.index(where: { $0.identifier == article.identifier }) else {
+            guard let index = articleListVC?.vm.articles.index(where: { $0.identifier == article.identifier }) else {
                 return
             }
-            articleListVC?.delete(article, at: index)
+            articleListVC?.vm.deleteItem(at: index)
         }
         
     }

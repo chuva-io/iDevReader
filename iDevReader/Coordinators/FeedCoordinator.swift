@@ -20,7 +20,8 @@ class FeedCoordinator: NSObject {
     var articleCoordinator: ArticleCoordinator?  // retain for target-action
     
     init(feed: Feed, bookmarkStore: BookmarkStore, presenter: UINavigationController) {
-        articleListVC = ArticleListVC()
+        let vm = ArticleListVM(bookmarkStore: bookmarkStore)
+        articleListVC = ArticleListVC(viewModel: vm)
         articleListVC.title = "Articles"
         
         self.feed = feed
@@ -29,7 +30,7 @@ class FeedCoordinator: NSObject {
         self.bookmarkStore = bookmarkStore
         
         super.init()
-        articleListVC.delegate = self
+        vm.delegate = self
     }
     
     func start() {
@@ -51,9 +52,17 @@ class FeedCoordinator: NSObject {
     
 }
 
-extension FeedCoordinator: ArticleListVCDelegate {
+extension FeedCoordinator: ArticleListVMDelegate {
     
-    func sender(_ sender: ArticleListVC, didSelect article: MWFeedItem) {
+    func sender(_ sender: ArticleListVM, set articles: [MWFeedItem]) { }
+    
+    func sender(_ sender: ArticleListVM, inserted article: MWFeedItem, at index: Int) {
+        articleListVC.insertItem(at: index)
+    }
+    
+    func sender(_ sender: ArticleListVM, deleted article: MWFeedItem, at index: Int) { }
+    
+    func sender(_ sender: ArticleListVM, selected article: MWFeedItem) {
         articleCoordinator = ArticleCoordinator(article: article,
                                                 bookmarkStore: bookmarkStore,
                                                 presenter: presenter)
@@ -69,7 +78,7 @@ extension FeedCoordinator: MWFeedParserDelegate {
     }
     
     func feedParser(_ parser: MWFeedParser!, didParseFeedItem item: MWFeedItem!) {
-        articleListVC.insert(item)
+        articleListVC.vm.insert(item, at: articleListVC.vm.articles.count)
     }
     
     func feedParserDidFinish(_ parser: MWFeedParser!) {
