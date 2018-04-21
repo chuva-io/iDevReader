@@ -126,7 +126,6 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
         let dateString = formatter.string(from: article.date)
         
         cell.dateLabel.text = dateString
-        cell.showMoreButton.addTarget(self, action: #selector(showMoreButtonTapped(_:forEvent:)), for: .touchUpInside)
         
         if expandedIndexPaths.contains(indexPath) { // collapse
             cell.descriptionLabel.numberOfLines = 0
@@ -134,7 +133,15 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
         }
         else {  // expand
             cell.descriptionLabel.numberOfLines = 4
-            cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
+            
+            if cell.descriptionLabel.isTruncated {
+                cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
+                cell.showMoreButton.addTarget(self, action: #selector(showMoreButtonTapped(_:forEvent:)), for: .touchUpInside)
+            }
+            else {
+                cell.showMoreButton.isHidden = true
+            }
+            
         }
         
         return cell
