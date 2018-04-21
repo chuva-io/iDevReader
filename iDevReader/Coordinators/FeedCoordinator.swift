@@ -21,7 +21,8 @@ class FeedCoordinator: NSObject {
     
     init(feed: Feed, bookmarkStore: BookmarkStore, presenter: UINavigationController) {
         articleListVC = ArticleListVC()
-
+        articleListVC.title = "Articles"
+        
         self.feed = feed
         self.presenter = presenter
         self.presenter.navigationBar.prefersLargeTitles = true

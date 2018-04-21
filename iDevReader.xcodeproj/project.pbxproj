@@ -276,6 +276,15 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		0AC1B7E3208AC96400483606 /* ArticleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0AEDFDA720731CC000208CA1 /* ArticleTableViewCell.swift */,
+				0AEDFDA820731CC000208CA1 /* ArticleTableViewCell.xib */,
+			);
+			path = ArticleTableViewCell;
+			sourceTree = "<group>";
+		};
 		0AEDFD9B2073068800208CA1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +300,7 @@
 			children = (
 				0AEDFDA520731C5300208CA1 /* CategoryTableViewCell */,
 				0AEDFDA620731C6A00208CA1 /* FeedTableViewCell */,
+				0AC1B7E3208AC96400483606 /* ArticleTableViewCell */,
 				2C1AD89C2077188F0087C3BF /* BaseRoundedCardCell.swift */,
 			);
 			path = Cells;
@@ -310,8 +320,6 @@
 			children = (
 				0AEDFDA12073155800208CA1 /* FeedTableViewCell.swift */,
 				0AEDFDA22073155800208CA1 /* FeedTableViewCell.xib */,
-				0AEDFDA720731CC000208CA1 /* ArticleTableViewCell.swift */,
-				0AEDFDA820731CC000208CA1 /* ArticleTableViewCell.xib */,
 			);
 			path = FeedTableViewCell;
 			sourceTree = "<group>";

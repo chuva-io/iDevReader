@@ -23,6 +23,7 @@ class BookmarkCoordinator {
     init(bookmarkStore: BookmarkStore) {
         self.bookmarkStore = bookmarkStore
         self.articleListVC = ArticleListVC(articles: bookmarkStore.items, allowsEditing: true)
+        self.articleListVC?.headerTitle = "Articles"
         self.rootVC = articleListVC!
         self.articleListVC!.delegate = self
     }

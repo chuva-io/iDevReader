@@ -8,13 +8,7 @@
 
 import UIKit
 
-class CategoryTableViewCell: BaseRoundedCardCell {
-    
+class CategoryTableViewCell: BaseRoundedCardCell {    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
 }

@@ -25,6 +25,8 @@ class ArticleListVC: UIViewController {
     weak var delegate: ArticleListVCDelegate?
     
     let allowsEditing: Bool
+    var headerTitle: String?
+    
     private(set) var articles: [MWFeedItem] = []
     fileprivate var expandedIndexPaths: Set<IndexPath> = []
     
@@ -38,6 +40,9 @@ class ArticleListVC: UIViewController {
             tableView.register(nib, forCellReuseIdentifier: ArticleListVC.cellIdentifier)
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.tableFooterView = UIView()
+            tableView.contentInset = UIEdgeInsetsMake(8, 0, 8, 0)
         }
     }
     
@@ -161,7 +166,7 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return  (articles.count == 0) ? nil : "Articles"
+        return  (articles.count == 0) ? nil : headerTitle ?? nil
     }
     
 }
