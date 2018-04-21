@@ -23,7 +23,7 @@ class CategoryListVC: UIViewController {
     
     @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
-            let nib = UINib(nibName: "CategoryTableViewCell", bundle: nil)
+            let nib = UINib(nibName: "ArticleTableViewCell", bundle: nil)
             tableView.register(nib, forCellReuseIdentifier: CategoryListVC.cellIdentifier)
             tableView.delegate = self
             tableView.dataSource = self
@@ -55,7 +55,7 @@ extension CategoryListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryListVC.cellIdentifier, for: indexPath) as! CategoryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryListVC.cellIdentifier, for: indexPath) as! ArticleTableViewCell
         let category = vm.categories[indexPath.row]
 
         cell.titleLabel.text = category.title

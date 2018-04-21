@@ -30,8 +30,6 @@
 		0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8F4EB92068617500BE3690 /* LaunchScreen.storyboard */; };
 		0A92524F207AFDFA00575899 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92524E207AFDFA00575899 /* Routable.swift */; };
 		0AC1B7E2208AC53000483606 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1B7E1208AC53000483606 /* UILabel+.swift */; };
-		0AEDFD9F207306BD00208CA1 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEDFD9D207306BD00208CA1 /* CategoryTableViewCell.swift */; };
-		0AEDFDA0207306BD00208CA1 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEDFD9E207306BD00208CA1 /* CategoryTableViewCell.xib */; };
 		0AEDFDA32073155800208CA1 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA12073155800208CA1 /* FeedTableViewCell.swift */; };
 		0AEDFDA42073155800208CA1 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA22073155800208CA1 /* FeedTableViewCell.xib */; };
 		0AEDFDA920731CC000208CA1 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEDFDA720731CC000208CA1 /* ArticleTableViewCell.swift */; };
@@ -85,8 +83,6 @@
 		0A8F4EC72068617500BE3690 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A92524E207AFDFA00575899 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		0AC1B7E1208AC53000483606 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
-		0AEDFD9D207306BD00208CA1 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
-		0AEDFD9E207306BD00208CA1 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		0AEDFDA12073155800208CA1 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		0AEDFDA22073155800208CA1 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		0AEDFDA720731CC000208CA1 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -298,21 +294,11 @@
 		0AEDFD9C2073069A00208CA1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0AEDFDA520731C5300208CA1 /* CategoryTableViewCell */,
 				0AEDFDA620731C6A00208CA1 /* FeedTableViewCell */,
 				0AC1B7E3208AC96400483606 /* ArticleTableViewCell */,
 				2C1AD89C2077188F0087C3BF /* BaseRoundedCardCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		0AEDFDA520731C5300208CA1 /* CategoryTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				0AEDFD9D207306BD00208CA1 /* CategoryTableViewCell.swift */,
-				0AEDFD9E207306BD00208CA1 /* CategoryTableViewCell.xib */,
-			);
-			path = CategoryTableViewCell;
 			sourceTree = "<group>";
 		};
 		0AEDFDA620731C6A00208CA1 /* FeedTableViewCell */ = {
@@ -444,7 +430,6 @@
 				0A5898B020688EFA00245EED /* ArticleListVC.xib in Resources */,
 				2C1AD8A520772E410087C3BF /* EmptyState.xib in Resources */,
 				0AEDFDAA20731CC000208CA1 /* ArticleTableViewCell.xib in Resources */,
-				0AEDFDA0207306BD00208CA1 /* CategoryTableViewCell.xib in Resources */,
 				0A5898AB2068777A00245EED /* FeedListVC.xib in Resources */,
 				0A8F4EBB2068617500BE3690 /* LaunchScreen.storyboard in Resources */,
 				2C1AD89F207728460087C3BF /* LaunchScreenIcon.png in Resources */,
@@ -591,7 +576,6 @@
 				0A6CE572207AF85E001C8A87 /* ArticleCoordinator.swift in Sources */,
 				0AEDFDA32073155800208CA1 /* FeedTableViewCell.swift in Sources */,
 				0A31637C2078739200C50403 /* BookmarkCoordinator.swift in Sources */,
-				0AEDFD9F207306BD00208CA1 /* CategoryTableViewCell.swift in Sources */,
 				0A92524F207AFDFA00575899 /* Routable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

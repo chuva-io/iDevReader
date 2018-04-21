@@ -142,11 +142,8 @@ extension ArticleListVC: UITableViewDelegate, UITableViewDataSource {
             if cell.descriptionLabel.isTruncated {
                 cell.showMoreButton.setTitle(ArticleTableViewCell.showMoreText, for: .normal)
                 cell.showMoreButton.addTarget(self, action: #selector(showMoreButtonTapped(_:forEvent:)), for: .touchUpInside)
+                cell.showMoreButton.isHidden = false
             }
-            else {
-                cell.showMoreButton.isHidden = true
-            }
-            
         }
         
         return cell
